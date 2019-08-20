@@ -5,19 +5,19 @@ case $1 in
 	"install" | "i")
 		sudo pacman -S --needed --noconfirm git base-devel
 		if [ "$YAY" == "" ]; then
-			echo "Yay not installed on system. Installing it!"
+			echo "=== Yay is not installed on system. Installing it ==="
 			git clone https://aur.archlinux.org/yay-bin.git
 			cd yay-bin
 			makepkg -sri --noconfirm
 			cd ../
-			echo "Done installing yay"
+			echo "=== Done installing yay ==="
 		fi
-		echo "Installing vim, tmux, powerline and airline"
+		echo "=== Installing vim, tmux, powerline and airline =="
 		yay -S --needed --noconfirm vim tmux powerline powerline-fonts-git vim-airline
-		echo "Installing Vundle"
+		echo "=== Installing Vundle ==="
 		 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 		vim +PluginInstall +qall
-		echo "Installed everything! run ./install apply to apply configurations"
+		echo "=== Done installing everything! run ./install apply to apply configurations ==="
 	;;
 	"apply" | "a")
 		mv ~/.vimrc ./vimrc.old
