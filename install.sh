@@ -12,6 +12,6 @@ case $1 in
 		mv ./tmux.conf.old ~/.tmux.conf
 	;;
 	*)
-		echo "install [(i)nstall | (u)install]"
+		echo "install [(i)nstall | (u)ninstall]"
 	;;
 esac
