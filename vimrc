@@ -45,3 +45,6 @@ vmap <silent><c-k> <Plug>NERDCommenterToggle
 noremap <c-n> :tabn<CR>
 noremap <c-p> :tabp<CR>
 inoremap jj <ESC>
+noremap <c-j> J  
+noremap J <c-d>  
+noremap K <c-u>  
