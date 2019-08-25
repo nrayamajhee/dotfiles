@@ -1,0 +1,3 @@
+[submodule "autodark"]
+	path = autodark
+	url = https://github.com/nrayamajhee/autodark.git
