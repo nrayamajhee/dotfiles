@@ -69,14 +69,6 @@ case $1 in
 	;;
 	"apply" | "a")
 		case $2 in
-		"vimtmux" | "vt")
-			print_head "Copying vimrc and tmux conf"
-			mv ~/.vimrc ./vimrc.old
-			mv ~/.tmux.conf ./tmux.conf.old
-			cp ./vimrc ~/.vimrc
-			cp ./tmux.conf ~/.tmux.conf
-			print_done
-		;;
 		"fonts" | "f")
 			print_head "Copying Font configuration."
 			cp ./fonts.conf ~/.config/fontconfig/
@@ -85,8 +77,19 @@ case $1 in
 			print "Monospace is: `fc-match mono`"
 			print_done
 		;;
+		"all" | "a")
+			$0 apply fonts
+			print_head "Copying vimrc, tmux and alacritty conf"
+			mv ~/.vimrc ./vimrc.old
+			mv ~/.tmux.conf ./tmux.conf.old
+			cp ./vimrc ~/.vimrc
+			cp ./tmux.conf ~/.tmux.conf
+			cp ~/.config/alacritty/alacritty.yml ./alacritty.yml.old
+			cp ./alacritty.yml ~/.config/alacritty
+			print_done
+		;;
 		*)
-			print_help "./build apply [ (vt) vimtmux | (f)onts]"
+			print_help "./build apply [ (a) all | (f)onts]"
 		;;
 		esac
 	;;
@@ -94,6 +97,7 @@ case $1 in
 		print_head "Restoring old vimrc and tmux conf"
 		mv ./vimrc.old ~/.vimrc
 		mv ./tmux.conf.old ~/.tmux.conf
+		mv ./alacritty.yml.old ~/.config/alacritty/alacritty.yml 
 		print_done
 	;;
 	*)
