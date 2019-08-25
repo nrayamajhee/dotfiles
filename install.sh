@@ -18,6 +18,8 @@ case $1 in
 		 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 		vim +PluginInstall +qall
 		echo "=== Done installing everything! run ./install apply to apply configurations ==="
+		echo "=== Copying local scripts!==="
+		cp -r /bin ~/.local/bin
 	;;
 	"apply" | "a")
 		mv ~/.vimrc ./vimrc.old

@@ -1,0 +1,91 @@
+#!/bin/bash
+
+SCRIPT=$0
+
+case $1 in
+	"switch")
+		case $2 in
+			"on")
+				echo GPU STATUS:
+				sudo tee /proc/acpi/bbswitch <<< ON
+				cat /proc/acpi/bbswitch
+			;;
+			"off")
+				echo GPU STATUS:
+				sudo tee /proc/acpi/bbswitch <<< OFF
+				cat /proc/acpi/bbswitch
+			;;
+			*)
+				echo "help: gpu switch on | off"
+			;;
+		esac
+	;;
+	"audio")
+		case $2 in
+			"on")
+				sudo modprobe nvhda
+				echo AUDIO STATUS:
+				sudo tee /proc/acpi/nvhda <<< ON
+				cat /proc/acpi/nvhda
+			;;
+			"off")
+				echo AUDIO STATUS:
+				sudo tee /proc/acpi/nvhda <<< OFF
+				cat /proc/acpi/nvhda
+			;;
+			"reload")
+				pulseaudio -k
+				$0 audio off
+				$0 audio on
+				pulseaudio -k
+			;;
+			*)
+				echo "help: gpu audio on | off"
+			;;
+		esac
+	;;
+	"load")
+		sudo modprobe nvidia
+		sudo modprobe nvidia_modeset
+		sudo modprobe nvidia_drm
+	;;
+	"stop")
+		sudo systemctl stop gdm.service
+	;;
+	"start")
+		sudo systemctl start gdm.service
+	;;
+	"unload")
+		sudo rmmod -f nvidia_drm
+		sudo rmmod -f nvidia_modeset
+		sudo rmmod -f nvidia
+	;;
+	"on")
+		$SCRIPT stop
+		sleep 1
+		$SCRIPT load
+		sleep 1
+		$SCRIPT switch on
+		sleep 1
+		$SCRIPT audio on
+		sleep 1
+		$SCRIPT start
+	;;
+	"off")
+		$SCRIPT stop 
+		sleep 1
+		$SCRIPT unload
+		sleep 1
+		$SCRIPT switch off
+		sleep 1
+		$SCRIPT audio off
+		sleep 1
+		$SCRIPT start 
+	;;
+	"stat")
+		cat /proc/acpi/bbswitch	
+	;;
+	*)
+		echo "help: gpu on | off | run | stat | load | unload | switch | audio | stop | start"
+	;;
+esac
