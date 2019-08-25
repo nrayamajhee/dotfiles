@@ -1,0 +1,102 @@
+#!/bin/bash
+YAY=$(pacman -Qsq yay)
+
+print_head() {
+	echo -e "	----------:: \c"
+	echo -e "$1\c"
+	echo " ::----------"
+}
+
+print() {
+	echo -e "		\c"
+	echo $1
+}
+
+print_help() {
+	print_head HELP
+	print "$1"
+}
+print_done() {
+	print_head DONE
+}
+
+case $1 in
+	"install" | "i")
+		if [ "$YAY" == "" ]; then
+			print "Yay is not installed on system. Installing it."
+			git clone https://aur.archlinux.org/yay-bin.git
+			cd yay-bin
+			makepkg -sri --noconfirm
+			cd ../
+		fi
+		case $2 in
+		"depends" | "d")
+			print_head "Installing AUR base development packages."
+			sudo pacman -S --needed --noconfirm git base-devel
+			print_head "Installing vim, tmux, powerline and airline."
+			yay -S --needed --noconfirm vim tmux powerline
+			yay -S --needed --noconfirm powerline-fonts-git vim-airline-git
+			print_head "Installing Vundle"
+			git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+			vim +PluginInstall +qall
+			print_done
+			$0
+		;;
+		"autodark" | "ad")
+			print_head "Installing autodark to local bin folder."
+			sudo cp autodark/autodark.timer /usr/lib/systemd/user/
+			sudo cp autodark/autodark.timer /usr/lib/systemd/user
+
+			systemctl enable --user autodark.timer
+			systemctl start --user autodark.timer
+			print_done 
+		;;
+		"fonts" | "f")
+			print_head "Installing Fira Sans and Merriweather."
+			yay -S --needed --noconfirm ttf-merriweather ttf-fira-sans powerline-fonts-git
+			print_done
+		;;
+		"all" | "a")
+			$0 install autodark
+			print_head "Installing gpu and revstereo to local bin directory"
+			cp -r ./bin ~/.local/
+			print_done
+		;;
+		*)
+			print_help "./build install [ (d)epends | (ad) autodark | (f)onts | (a)ll ]"
+		;;
+		esac
+	;;
+	"apply" | "a")
+		case $2 in
+		"vimtmux" | "vt")
+			print_head "Copying vimrc and tmux conf"
+			mv ~/.vimrc ./vimrc.old
+			mv ~/.tmux.conf ./tmux.conf.old
+			cp ./vimrc ~/.vimrc
+			cp ./tmux.conf ~/.tmux.conf
+			print_done
+		;;
+		"fonts" | "f")
+			print_head "Copying Font configuration."
+			cp ./fonts.conf ~/.config/fontconfig/
+			print "Sans is: `fc-match sans`"
+			print "Serif is: `fc-match serif`"
+			print "Monospace is: `fc-match mono`"
+			print_done
+		;;
+		*)
+			print_help "./build apply [ (vt) vimtmux | (f)onts]"
+		;;
+		esac
+	;;
+	"restore" | "r")
+		print_head "Restoring old vimrc and tmux conf"
+		mv ./vimrc.old ~/.vimrc
+		mv ./tmux.conf.old ~/.tmux.conf
+		print_done
+	;;
+	*)
+		print_help "./build [(i)nstall | (a)ppy | (r)estore ]"
+	;;
+esac
