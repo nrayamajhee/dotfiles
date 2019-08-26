@@ -32,13 +32,17 @@ case $1 in
 		case $2 in
 		"depends" | "d")
 			print_head "Installing AUR base development packages."
-			sudo pacman -S --needed --noconfirm git base-devel
+			sudo pacman -S --needed --noconfirm git base-devel python3
 			print_head "Installing vim, tmux, powerline and airline."
 			yay -S --needed --noconfirm vim tmux powerline
 			yay -S --needed --noconfirm powerline-fonts-git vim-airline-git
 			print_head "Installing Vundle"
 			git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 			vim +PluginInstall +qall
+			cd ~/.vim/bundle/YouCompleteMe
+			git submodule udpate --init --recursive
+			python3 install.py --rust-completer
+			python3 install.py --js-completer
 			print_done
 			$0
 		;;

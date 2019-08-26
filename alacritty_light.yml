@@ -1,3 +1,7 @@
+window:
+    dimensions:
+        columns: 80
+        lines: 30
 colors:
   primary:
     background: "0xfdf6e3" # base3

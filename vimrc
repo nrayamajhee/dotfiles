@@ -42,6 +42,7 @@ let g:syntastic_javascript_checkers = ['syntastic-javascript-eslint']
 
 autocmd FileType vue noremap <buffer> <c-f> :%!vue-formatter<CR>
 vmap <silent><c-k> <Plug>NERDCommenterToggle
+map <silent><c-k> <Plug>NERDCommenterToggle
 noremap <c-n> :tabn<CR>
 noremap <c-p> :tabp<CR>
 inoremap jj <ESC>
