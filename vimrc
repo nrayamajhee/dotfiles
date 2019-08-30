@@ -4,6 +4,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'rust-lang/rust.vim'
+Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdcommenter'
@@ -20,7 +21,8 @@ colorscheme solarized
 "let g:racer_cmd = "/home/nishan/.cargo/bin/racer"
 "let g:racer_insert_paren = 1
 "let g:racer_experimental_completer = 1
-let g:formatterpath = ['/usr/bin/vue-formatter']
+let g:formatterpath = ['/usr/bin/vue-formatter', '/usr/bin/js-beautify']
+let g:ycm_autoclose_preview_window_after_completion = 1
 set tabstop=4
 set shiftwidth=4
 set autoindent
@@ -40,7 +42,10 @@ let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled=1
 let g:syntastic_javascript_checkers = ['syntastic-javascript-eslint']
 
+autocmd FileType javascript setlocal equalprg=js-beautify\ --stdin
 autocmd FileType vue noremap <buffer> <c-f> :%!vue-formatter<CR>
+autocmd FileType javascript noremap <buffer> <c-f> :%!js-formatter<CR>
+autocmd FileType rust noremap <buffer> <c-f> :%RustFmt<CR>
 vmap <silent><c-k> <Plug>NERDCommenterToggle
 map <silent><c-k> <Plug>NERDCommenterToggle
 noremap <c-n> :tabn<CR>
