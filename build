@@ -1,5 +1,7 @@
 #!/bin/bash
 YAY=$(pacman -Qsq yay)
+VUNDLE_DIR=~/.vim/bundle/Vundle.vim
+POEWRLINE_DIR=~/.config/powerline
 
 print_head() {
 	echo -e "	----------:: \c"
@@ -32,13 +34,26 @@ case $1 in
 		case $2 in
 		"depends" | "d")
 			print_head "Installing AUR base development packages."
-			sudo pacman -S --needed --noconfirm git base-devel python3
+			sudo pacman -S --needed --noconfirm git base-devel python3 jq
 			print_head "Installing vim, tmux, powerline and airline."
 			yay -S --needed --noconfirm vim tmux powerline
 			yay -S --needed --noconfirm powerline-fonts-git vim-airline-git
+			print_head "Copying Default powerline configurations"
 			print_head "Installing Vundle"
-			git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+			if [ ! -d "$VUNDLE_DIR" ]; then
+				print_head "Cloning Vundle"
+				git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+			else
+				print_head "Vundle already installed. Pulling changes!"
+				cd ~/.vim/bundle/Vundle.vim
+				git pull
+		   	fi
 			vim +PluginInstall +qall
+			if [ ! -d "$POEWRLINE_DIR" ]; then
+				mkdir ~/.config/powerline
+		   	fi
+			cp -r /usr/lib/python3.7/site-packages/powerline/config_files/* ~/.config/powerline
+			jq '.ext.tmux."colorscheme" = "solarized" | .ext.shell."colorscheme" = "solarized"' ~/.config/powerline/config.json > ~/.config/powerline/config.json
 			cd ~/.vim/bundle/YouCompleteMe
 			git submodule udpate --init --recursive
 			python3 install.py --rust-completer
@@ -86,10 +101,10 @@ case $1 in
 			print_head "Copying vimrc, tmux and alacritty conf"
 			mv ~/.vimrc ./vimrc.old
 			mv ~/.tmux.conf ./tmux.conf.old
-			cp ./vimrc ~/.vimrc
 			cp ./tmux.conf ~/.tmux.conf
 			cp ~/.config/alacritty/alacritty.yml ./alacritty.yml.old
-			cp ./alacritty.yml ~/.config/alacritty
+			cat alacritty.yml >> cat light/alacritty.yml > ~/.config/alacritty/alacritty.yml
+			cat vimrc >> cat light/vimrc > ~/.vimrc 
 			print_done
 		;;
 		*)

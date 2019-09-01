@@ -53,3 +53,5 @@ noremap <c-j> J
 noremap J <c-d>  
 noremap K <c-u>  
 
+set background=light
+let g:airline_solarized_bg='light'

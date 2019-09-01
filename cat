@@ -1,3 +1,5 @@
+set background=light
+let g:airline_solarized_bg='light'
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -53,3 +55,5 @@ noremap <c-j> J
 noremap J <c-d>  
 noremap K <c-u>  
 
+set background=dark
+let g:airline_solarized_bg='dark'
