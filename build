@@ -53,7 +53,7 @@ case $1 in
 				mkdir ~/.config/powerline
 		   	fi
 			cp -r /usr/lib/python3.7/site-packages/powerline/config_files/* ~/.config/powerline
-			jq '.ext.tmux."colorscheme" = "solarized" | .ext.shell."colorscheme" = "solarized"' ~/.config/powerline/config.json > ~/.config/powerline/config.json
+			jq '.ext.tmux."colorscheme" = "solarized" | .ext.shell."colorscheme" = "solarized"' ~/.config/powerline/config.json > tmp.$$.json && mv -f tmp.$$.json ~/.config/powerline/config.json
 			cd ~/.vim/bundle/YouCompleteMe
 			git submodule udpate --init --recursive
 			python3 install.py --rust-completer
