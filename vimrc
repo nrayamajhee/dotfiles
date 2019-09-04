@@ -8,6 +8,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'posva/vim-vue'
 call vundle#end()
@@ -46,10 +47,10 @@ autocmd FileType javascript noremap <buffer> <c-f> :%!js-formatter<CR>
 autocmd FileType rust noremap <buffer> <c-f> :%RustFmt<CR>
 vmap <silent><c-k> <Plug>NERDCommenterToggle
 map <silent><c-k> <Plug>NERDCommenterToggle
+map <C-\> :NERDTreeToggle<CR>
 noremap <c-n> :tabn<CR>
 noremap <c-p> :tabp<CR>
 inoremap jj <ESC>
 noremap <c-j> J  
 noremap J <c-d>  
 noremap K <c-u>  
-
