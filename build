@@ -1,7 +1,9 @@
 #!/bin/bash
 YAY=$(pacman -Qsq yay)
 VUNDLE_DIR=~/.vim/bundle/Vundle.vim
-POEWRLINE_DIR=~/.config/powerline
+AUTODARK_DIR=~/.config/autodark
+LOCAL_BIN_DIR=~/.local/bin
+#POEWRLINE_DIR=~/.config/powerline
 
 print_head() {
 	echo -e "	----------:: \c"
@@ -35,9 +37,9 @@ case $1 in
 		"depends" | "d")
 			print_head "Installing AUR base development packages."
 			sudo pacman -S --needed --noconfirm git base-devel python3 jq
-			print_head "Installing vim, tmux, powerline and airline."
-			yay -S --needed --noconfirm vim tmux powerline
-			yay -S --needed --noconfirm powerline-fonts-git vim-airline-git
+			print_head "Installing vim, tmux, powerline"
+			#yay -S --needed --noconfirm vim tmux powerline
+			yay -S --needed --noconfirm powerline-fonts-git starship
 			print_head "Copying Default powerline configurations"
 			print_head "Installing Vundle"
 			if [ ! -d "$VUNDLE_DIR" ]; then
@@ -49,25 +51,39 @@ case $1 in
 				git pull
 		   	fi
 			vim +PluginInstall +qall
-			if [ ! -d "$POEWRLINE_DIR" ]; then
-				mkdir ~/.config/powerline
-		   	fi
-			cp -r /usr/lib/python3.7/site-packages/powerline/config_files/* ~/.config/powerline
-			jq '.ext.tmux."colorscheme" = "solarized" | .ext.shell."colorscheme" = "solarized"' ~/.config/powerline/config.json > tmp.$$.json && mv -f tmp.$$.json ~/.config/powerline/config.json
+			#if [ ! -d "$POEWRLINE_DIR" ]; then
+				#mkdir ~/.config/powerline
+			   #fi
+			#cp -r /usr/lib/python3.7/site-packages/powerline/config_files/* ~/.config/powerline
+			#jq '.ext.tmux."colorscheme" = "solarized" | .ext.shell."colorscheme" = "solarized"' ~/.config/powerline/config.json > tmp.$$.json && mv -f tmp.$$.json ~/.config/powerline/config.json
 			cd ~/.vim/bundle/YouCompleteMe
 			git submodule udpate --init --recursive
 			python3 install.py --rust-completer
 			python3 install.py --js-completer
 			print_done
-			$0
 		;;
 		"autodark" | "ad")
 			print_head "Installing autodark to local bin folder."
 			sudo cp autodark/autodark.timer /usr/lib/systemd/user/
 			sudo cp autodark/autodark.timer /usr/lib/systemd/user
 
+
 			systemctl enable --user autodark.timer
 			systemctl start --user autodark.timer
+
+			if [ ! -d "$LOCAL_BIN_DIR" ]; then
+				mkdir ~/.local/bin
+			fi
+
+			if [ ! -d "$AUTODARK_DIR" ]; then
+				mkdir ~/.config/autodark
+			fi
+
+			sudo cp autodark/autodark ~/.local/bin/autodark
+			sudo cp alacritty.yml ~/.config/autodark/
+			sudo cp vimrc ~/.config/autodark/
+			sudo cp -r dark ~/.config/autodark/
+			sudo cp -r light ~/.config/autodark/
 			print_done 
 		;;
 		"fonts" | "f")
@@ -76,8 +92,9 @@ case $1 in
 			print_done
 		;;
 		"all" | "a")
-			$0 install autodark
 			print_head "Installing gpu and revstereo to local bin directory"
+			$0 install depends
+			$0 install autodark
 			cp -r ./bin ~/.local/
 			print_done
 		;;

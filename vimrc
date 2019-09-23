@@ -5,6 +5,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdcommenter'
@@ -21,6 +23,12 @@ colorscheme solarized
 "let g:racer_cmd = "/home/nishan/.cargo/bin/racer"
 "let g:racer_insert_paren = 1
 "let g:racer_experimental_completer = 1
+
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_left_alt_sep = '|'
+let g:airline_right_alt_sep = ''
+
 let g:formatterpath = ['/usr/bin/vue-formatter', '/usr/bin/js-beautify']
 let g:ycm_autoclose_preview_window_after_completion = 1
 set tabstop=4
@@ -44,7 +52,7 @@ let g:syntastic_javascript_checkers = ['syntastic-javascript-eslint']
 autocmd FileType javascript setlocal equalprg=js-beautify\ --stdin
 autocmd FileType vue noremap <buffer> <c-f> :%!vue-formatter<CR>
 autocmd FileType javascript noremap <buffer> <c-f> :%!js-formatter<CR>
-autocmd FileType rust noremap <buffer> <c-f> :%RustFmt<CR>
+autocmd FileType rust noremap <buffer> <c-f> :RustFmt<CR>
 vmap <silent><c-k> <Plug>NERDCommenterToggle
 map <silent><c-k> <Plug>NERDCommenterToggle
 map <C-\> :NERDTreeToggle<CR>
