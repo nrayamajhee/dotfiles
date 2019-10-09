@@ -11,6 +11,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/syntastic'
 Plugin 'posva/vim-vue'
 call vundle#end()
@@ -19,6 +20,8 @@ filetype plugin on
 
 syntax enable
 colorscheme solarized
+
+set hidden
 
 "let g:racer_cmd = "/home/nishan/.cargo/bin/racer"
 "let g:racer_insert_paren = 1
@@ -56,8 +59,9 @@ autocmd FileType rust noremap <buffer> <c-f> :RustFmt<CR>
 vmap <silent><c-k> <Plug>NERDCommenterToggle
 map <silent><c-k> <Plug>NERDCommenterToggle
 map <C-\> :NERDTreeToggle<CR>
-noremap <c-n> :tabn<CR>
-noremap <c-p> :tabp<CR>
+noremap <c-n> :bn<CR>
+noremap <c-p> :bp<CR>
+noremap <c-w> :bd<CR>
 inoremap jj <ESC>
 noremap <c-j> J  
 noremap J <c-d>  
