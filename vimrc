@@ -40,6 +40,7 @@ set autoindent
 set smartindent
 
 set number relativenumber
+let g:NERDTreeWinSize=25
 
 augroup numbertoggle
   autocmd!
@@ -58,10 +59,11 @@ autocmd FileType javascript noremap <buffer> <c-f> :%!js-formatter<CR>
 autocmd FileType rust noremap <buffer> <c-f> :RustFmt<CR>
 vmap <silent><c-k> <Plug>NERDCommenterToggle
 map <silent><c-k> <Plug>NERDCommenterToggle
-map <C-\> :NERDTreeToggle<CR>
+map <C-\> :NERDTreeFocus<CR>
+nnoremap <Leader>w <C-w>
+map <c-w> :bd<CR>
 noremap <c-n> :bn<CR>
 noremap <c-p> :bp<CR>
-noremap <c-w> :bd<CR>
 inoremap jj <ESC>
 noremap <c-j> J  
 noremap J <c-d>  
