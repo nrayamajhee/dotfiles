@@ -120,8 +120,14 @@ case $1 in
 			mv ~/.tmux.conf ./tmux.conf.old
 			cp ./tmux.conf ~/.tmux.conf
 			cp ~/.config/alacritty/alacritty.yml ./alacritty.yml.old
-			cat alacritty.yml >> cat light/alacritty.yml > ~/.config/alacritty/alacritty.yml
-			cat vimrc >> cat light/vimrc > ~/.vimrc 
+			cp vimrc ~/.config/autodark/vimrc
+			cp alacritty ~/.config/autodark/alacritty.yml
+			cp -r dark ~/.config/autodark/
+			cp -r light ~/.config/autodark/
+			cat alacritty.yml > ~/.config/alacritty/alacritty.yml
+			cat cat light/alacritty.yml >> ~/.config/alacritty/alacritty.yml
+			cat vimrc >> ~/.vimrc 
+			cat light/vimrc >> ~/.vimrc 
 			print_done
 		;;
 		*)
