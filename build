@@ -37,10 +37,8 @@ case $1 in
 		"depends" | "d")
 			print_head "Installing AUR base development packages."
 			sudo pacman -S --needed --noconfirm git base-devel python3 jq
-			print_head "Installing vim, tmux, powerline"
-			#yay -S --needed --noconfirm vim tmux powerline
-			yay -S --needed --noconfirm powerline-fonts-git starship
-			print_head "Copying Default powerline configurations"
+			print_head "Installing vim, and tmux"
+			yay -S --needed --noconfirm vim tmux starship-bin lsd bat
 			print_head "Installing Vundle"
 			if [ ! -d "$VUNDLE_DIR" ]; then
 				print_head "Cloning Vundle"
@@ -51,11 +49,6 @@ case $1 in
 				git pull
 		   	fi
 			vim +PluginInstall +qall
-			#if [ ! -d "$POEWRLINE_DIR" ]; then
-				#mkdir ~/.config/powerline
-			   #fi
-			#cp -r /usr/lib/python3.7/site-packages/powerline/config_files/* ~/.config/powerline
-			#jq '.ext.tmux."colorscheme" = "solarized" | .ext.shell."colorscheme" = "solarized"' ~/.config/powerline/config.json > tmp.$$.json && mv -f tmp.$$.json ~/.config/powerline/config.json
 			cd ~/.vim/bundle/YouCompleteMe
 			git submodule udpate --init --recursive
 			python3 install.py --rust-completer
@@ -121,11 +114,11 @@ case $1 in
 			cp ./tmux.conf ~/.tmux.conf
 			cp ~/.config/alacritty/alacritty.yml ./alacritty.yml.old
 			cp vimrc ~/.config/autodark/vimrc
-			cp alacritty ~/.config/autodark/alacritty.yml
+			cp alacritty.yml ~/.config/autodark/alacritty.yml
 			cp -r dark ~/.config/autodark/
 			cp -r light ~/.config/autodark/
 			cat alacritty.yml > ~/.config/alacritty/alacritty.yml
-			cat cat light/alacritty.yml >> ~/.config/alacritty/alacritty.yml
+			cat light/alacritty.yml >> ~/.config/alacritty/alacritty.yml
 			cat vimrc >> ~/.vimrc 
 			cat light/vimrc >> ~/.vimrc 
 			print_done
