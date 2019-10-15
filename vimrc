@@ -4,6 +4,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'rust-lang/rust.vim'
+Plugin 'tikhomirov/vim-glsl'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -41,6 +42,8 @@ set smartindent
 
 set number relativenumber
 let g:NERDTreeWinSize=25
+
+autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
 augroup numbertoggle
   autocmd!
