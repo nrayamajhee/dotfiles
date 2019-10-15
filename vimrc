@@ -57,8 +57,8 @@ autocmd FileType javascript setlocal equalprg=js-beautify\ --stdin
 autocmd FileType vue noremap <buffer> <c-f> :%!vue-formatter<CR>
 autocmd FileType javascript noremap <buffer> <c-f> :%!js-formatter<CR>
 autocmd FileType rust noremap <buffer> <c-f> :RustFmt<CR>
-vmap <silent><c-k> <Plug>NERDCommenterToggle
-map <silent><c-k> <Plug>NERDCommenterToggle
+vmap <silent># <Plug>NERDCommenterToggle
+map <silent># <Plug>NERDCommenterToggle
 map <C-\> :NERDTreeFocus<CR>
 map <c-s> :AirlineRefresh <bar> :so ~/.vimrc<CR>
 nnoremap <Leader>w <C-w>
@@ -66,6 +66,8 @@ map <c-w> :bd<CR>
 noremap <c-n> :bn<CR>
 noremap <c-p> :bp<CR>
 inoremap jj <ESC>
-noremap <c-j> J  
-noremap J <c-d>  
-noremap K <c-u>  
+noremap J <c-d>
+noremap K <c-u>
+noremap L J  
+noremap <c-j> <c-y> 
+noremap <c-k> <c-e>
