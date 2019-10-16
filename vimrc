@@ -4,6 +4,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'rust-lang/rust.vim'
+Plugin 'maksimr/vim-jsbeautify'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
@@ -33,7 +34,7 @@ let g:airline_right_sep = ''
 let g:airline_left_alt_sep = '|'
 let g:airline_right_alt_sep = ''
 
-let g:formatterpath = ['/usr/bin/vue-formatter', '/usr/bin/js-beautify']
+let g:formatterpath = ['/usr/bin/vue-formatter']
 let g:ycm_autoclose_preview_window_after_completion = 1
 set tabstop=4
 set shiftwidth=4
@@ -58,7 +59,7 @@ let g:syntastic_javascript_checkers = ['syntastic-javascript-eslint']
 
 autocmd FileType javascript setlocal equalprg=js-beautify\ --stdin
 autocmd FileType vue noremap <buffer> <c-f> :%!vue-formatter<CR>
-autocmd FileType javascript noremap <buffer> <c-f> :%!js-formatter<CR>
+autocmd FileType javascript noremap <buffer> <c-f> :call JsBeautify()<CR>
 autocmd FileType rust noremap <buffer> <c-f> :RustFmt<CR>
 vmap <silent># <Plug>NERDCommenterToggle
 map <silent># <Plug>NERDCommenterToggle
