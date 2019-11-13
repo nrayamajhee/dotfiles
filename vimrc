@@ -25,10 +25,6 @@ colorscheme solarized
 
 set hidden
 
-"let g:racer_cmd = "/home/nishan/.cargo/bin/racer"
-"let g:racer_insert_paren = 1
-"let g:racer_experimental_completer = 1
-
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_left_alt_sep = '|'
@@ -75,3 +71,12 @@ noremap K <c-u>
 noremap L J  
 noremap <c-j> <c-y> 
 noremap <c-k> <c-e>
+
+set mouse=a
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
