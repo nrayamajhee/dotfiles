@@ -1,0 +1,101 @@
+#!/bin/bash
+GNOME_T_ID=b1dcc9dd-5262-4d8d-a863-c897e6d979b9
+GTK_THEME_LIGHT="Adwaita"
+GTK_THEME_DARK="Adwaita-dark"
+
+decide() {
+	sunrise=`curl -X GET 'http://api.openweathermap.org/data/2.5/weather?zip=70148,us&APPID=86b00cb2e90213e0679873b97c9378fb' -H 'Content-Type: application/json' | jq '.sys.sunrise'`
+	sunset=`curl -X GET 'http://api.openweathermap.org/data/2.5/weather?zip=70148,us&APPID=86b00cb2e90213e0679873b97c9378fb' -H 'Content-Type: application/json' | jq '.sys.sunset'`
+	now=`date +'%s'`
+	local result=$(($now > $sunrise && $now < $sunset))
+	if [[ "$result" = "1" ]];then
+		return
+	fi
+	false
+}
+
+case $1 in
+	"gnome")
+		case $2 in
+			"dark")
+				gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME_DARK"
+				if [ $GNOME_T_ID  == "" ]; then
+					echo "Gnome terminal ID not set! Not changing terminal theme"
+				else
+					dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color "'rgb(0,43,54)'" 
+					dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/foreground-color "'rgb(131,148,150)'"
+				fi
+				gsettings set org.gnome.gedit.preferences.editor scheme "solarized-dark"
+			;;
+			"light")
+				gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME_LIGHT"
+				if [ $GNOME_T_ID  == "" ]; then
+					echo "Gnome terminal ID not set! Not changing terminal theme"
+				else
+					dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color "'rgb(253,246,227)'"
+					dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/foreground-color "'rgb(101,123,131)'"
+				fi
+				gsettings set org.gnome.gedit.preferences.editor scheme "solarized-light"
+			;;
+		esac
+	;;
+	"alacrrity")
+		cat ~/.config/autodark/alacritty.yml > ~/.config/alacritty/alacritty.yml
+		cat ~/.config/autodark/vimrc > ~/.vimrc
+		case $2 in
+			"dark")
+				cat ~/.config/autodark/dark/alacritty.yml >> ~/.config/alacritty/alacritty.yml
+				cat ~/.config/autodark/dark/vimrc >> ~/.vimrc
+			;;
+			"light")
+				cat ~/.config/autodark/light/alacritty.yml >> ~/.config/alacritty/alacritty.yml
+				cat ~/.config/autodark/light/vimrc >> ~/.vimrc
+			;;
+		esac
+	;;
+	"code")
+		case $2 in
+			"light")
+				jq '."workbench.colorTheme" = "Solarized Light"' /home/nishan/.config/Code\ -\ OSS/User/settings.json > tmp.$$.json && mv -f tmp.$$.json /home/nishan/.config/Code\ -\ OSS/User/settings.json 
+			;;
+			"dark")
+				jq '."workbench.colorTheme" = "Solarized Dark"' /home/nishan/.config/Code\ -\ OSS/User/settings.json > tmp.$$.json && mv -f tmp.$$.json /home/nishan/.config/Code\ -\ OSS/User/settings.json 
+			;;
+		esac
+	;;
+	"on")
+		$0 gnome dark
+		$0 code dark
+		$0 alacrrity dark
+		echo "--theme=\"OneHalfDark\"" > ~/.config/bat/config
+	;;
+	"off")
+		$0 gnome light
+		$0 code light
+		$0 alacrrity light
+		echo "--theme=\"OneHalfLight\"" > ~/.config/bat/config
+	;;
+	"auto" | "")
+		if decide; then
+			$0 off
+		else
+			$0 on
+		fi
+	;;
+	"schedule")
+		decide
+		echo Now: $now Sun rises at: $sunrise Sun sets at: $sunset
+		if (($now < $sunrise)); then
+				echo Trigger sunrise
+				systemd-run --user --on-calendar=@$sunrise $0
+		fi
+		if (($now < $sunset)); then
+				echo Trigger sunset
+				systemd-run --user --on-calendar=@$sunset $0
+		fi
+		$0
+	;;
+	"help" | *)
+		echo "dark on | off | auto | trigger | help"
+	;;
+esac

@@ -44,8 +44,8 @@ autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
 augroup numbertoggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  autocmd FocusGained,InsertLeave * set relativenumber
+  autocmd FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
 let g:airline_powerline_fonts = 1

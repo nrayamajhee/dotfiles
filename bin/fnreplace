@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ "$1" == "" ] || [ "$2" == "" ]; then
+    echo No text provided!
+    echo help: fnreplace [search text] [replace text]
+else
+    rg "$1"
+    echo Do you want to replace all instances of "\"$1\""? [Y/n]
+    read confirm
+    if [ "$confirm" == "" ] || [ "$confirm" == "Y" ] || [ "$confirm" == "y" ]; then
+        for file in $(rg -l "$1"); do
+            echo Replacing file: $file
+            cp $file "$file.old"
+            sed -i "s/$1/$2/g" $file
+        done
+        echo "All instances of \"$1\" has been replaced with \"$2\"!"
+        echo "Backup files have been saved as .old files!"
+    else
+        echo "Didn't replace anything!"
+    fi 
+fi
