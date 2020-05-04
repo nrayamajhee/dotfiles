@@ -6,16 +6,16 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'tikhomirov/vim-glsl'
-Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'valloric/YouCompleteMe'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'dense-analysis/ale'
 Plugin 'posva/vim-vue'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'valloric/YouCompleteMe'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 call vundle#end()
 
 filetype plugin on
@@ -44,8 +44,8 @@ autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
 augroup numbertoggle
   autocmd!
-  autocmd FocusGained,InsertLeave * set relativenumber
-  autocmd FocusLost,InsertEnter   * set norelativenumber
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
 let g:airline_powerline_fonts = 1
@@ -55,8 +55,6 @@ let g:airline#extensions#tabline#enabled=1
 autocmd FileType javascript setlocal equalprg=js-beautify\ --stdin
 autocmd FileType vue noremap <buffer> <c-f> :%!vue-formatter<CR>
 autocmd FileType javascript noremap <buffer> <c-f> :call JsBeautify()<CR>
-autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<CR>
-autocmd FileType css noremap <buffer> <c-f> :call CssBeautify()<CR>
 autocmd FileType rust noremap <buffer> <c-f> :RustFmt<CR>
 vmap <silent># <Plug>NERDCommenterToggle
 map <silent># <Plug>NERDCommenterToggle
@@ -74,8 +72,6 @@ noremap <c-j> <c-y>
 noremap <c-k> <c-e>
 
 set mouse=a
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+
 set background=dark
 let g:airline_solarized_bg='dark'
