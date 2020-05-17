@@ -1,0 +1,8 @@
+[core]
+    pager = delta --dark --theme='Solarized (dark)'
+
+[interactive]
+    diffFilter = delta --color-only
+[user]
+    email = nishan@rayamajhee.com
+    name = nrayamajhee

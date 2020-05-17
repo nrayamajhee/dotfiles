@@ -1,141 +1,101 @@
 #!/bin/bash
-YAY=$(pacman -Qsq yay)
-VUNDLE_DIR=~/.vim/bundle/Vundle.vim
-AUTODARK_DIR=~/.config/autodark
-LOCAL_BIN_DIR=~/.local/bin
-#POEWRLINE_DIR=~/.config/powerline
 
-print_head() {
-	echo -e "	----------:: \c"
-	echo -e "$1\c"
-	echo " ::----------"
-}
-
-print() {
-	echo -e "		\c"
-	echo $1
-}
-
-print_help() {
-	print_head HELP
-	print "$1"
-}
-print_done() {
-	print_head DONE
-}
-
-case $1 in
-	"install" | "i")
-		if [ "$YAY" == "" ]; then
-			print "Yay is not installed on system. Installing it."
-			git clone https://aur.archlinux.org/yay-bin.git
-			cd yay-bin
-			makepkg -sri --noconfirm
-			cd ../
+install() {
+	if [ "$(pacman -Qsq yay-bin)" == "" ]; then
+		echo "Yay is not installed on system. Installing it."
+		if [ "$(pacman -Qsq git)" == "" ]; then
+			echo "Git is not installed on system. Installing it and base-devel."
+			pacman -S --needed --noconfirm git base-devel
 		fi
-		case $2 in
-		"depends" | "d")
-			print_head "Installing AUR base development packages."
-			sudo pacman -S --needed --noconfirm git base-devel python3 jq
-			print_head "Installing vim, and tmux"
-			yay -S --needed --noconfirm vim tmux starship-bin lsd bat
-			print_head "Installing Vundle"
-			if [ ! -d "$VUNDLE_DIR" ]; then
-				print_head "Cloning Vundle"
-				git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-			else
-				print_head "Vundle already installed. Pulling changes!"
-				cd ~/.vim/bundle/Vundle.vim
-				git pull
-		   	fi
-			vim +PluginInstall +qall
-			cd ~/.vim/bundle/YouCompleteMe
-			git submodule udpate --init --recursive
-			python3 install.py --rust-completer
-			python3 install.py --js-completer
-			print_done
+		git clone https://aur.archlinux.org/yay-bin.git
+		cd yay-bin
+		makepkg -sri --noconfirm
+		cd ../
+	fi
+	yay -S --noconfirm --needed $@
+}
+
+fonts() {
+	case $1 in
+		"install" | "i")
+			install ttf-merriweather ttf-fira-sans noto-fonts-emoji powerline-fonts-git nerd-fonts-fira-mono
 		;;
-		"autodark" | "ad")
-			print_head "Installing autodark to local bin folder."
-			sudo cp autodark/autodark.timer /usr/lib/systemd/user/
-			sudo cp autodark/autodark.timer /usr/lib/systemd/user
-
-
-			systemctl enable --user autodark.timer
-			systemctl start --user autodark.timer
-
-			if [ ! -d "$LOCAL_BIN_DIR" ]; then
-				mkdir ~/.local/bin
+		"apply" | "a")
+			if [ ! -d "$HOME/.config/fontconfig" ]; then
+				mkdir ~/.config/fontconfig
 			fi
-
-			if [ ! -d "$AUTODARK_DIR" ]; then
-				mkdir ~/.config/autodark
-			fi
-
-			sudo cp autodark/autodark ~/.local/bin/autodark
-			sudo cp alacritty.yml ~/.config/autodark/
-			sudo cp vimrc ~/.config/autodark/
-			sudo cp -r dark ~/.config/autodark/
-			sudo cp -r light ~/.config/autodark/
-			print_done 
-		;;
-		"fonts" | "f")
-			print_head "Installing Fira Sans and Merriweather."
-			yay -S --needed --noconfirm ttf-merriweather ttf-fira-sans powerline-fonts-git
-			print_done
-		;;
-		"all" | "a")
-			print_head "Installing gpu and revstereo to local bin directory"
-			$0 install depends
-			$0 install autodark
-			cp -r ./bin ~/.local/
-			print_done
-		;;
-		*)
-			print_help "./build install [ (d)epends | (ad) autodark | (f)onts | (a)ll ]"
-		;;
-		esac
-	;;
-	"apply" | "a")
-		case $2 in
-		"fonts" | "f")
-			print_head "Copying Font configuration."
 			cp ./fonts.conf ~/.config/fontconfig/
+			fc-cache
 			print "Sans is: `fc-match sans`"
 			print "Serif is: `fc-match serif`"
 			print "Monospace is: `fc-match mono`"
-			print_done
-		;;
-		"all" | "a")
-			$0 apply fonts
-			print_head "Copying vimrc, tmux and alacritty conf"
-			mv ~/.vimrc ./vimrc.old
-			mv ~/.tmux.conf ./tmux.conf.old
-			cp ./tmux.conf ~/.tmux.conf
-			cp ~/.config/alacritty/alacritty.yml ./alacritty.yml.old
-			cp vimrc ~/.config/autodark/vimrc
-			cp alacritty.yml ~/.config/autodark/alacritty.yml
-			cp -r dark ~/.config/autodark/
-			cp -r light ~/.config/autodark/
-			cat alacritty.yml > ~/.config/alacritty/alacritty.yml
-			cat light/alacritty.yml >> ~/.config/alacritty/alacritty.yml
-			cat vimrc >> ~/.vimrc 
-			cat light/vimrc >> ~/.vimrc 
-			print_done
 		;;
 		*)
-			print_help "./build apply [ (a) all | (f)onts]"
+			echo "help: ./build (f)fonts [(i)nstall|(a)pply]"
 		;;
-		esac
+	esac
+}
+
+console() {
+	case $1 in
+		"install" | "i")
+			install alacritty neovim python-pynvim git-delta-bin tmux starship-bin lsd-bin bat
+		;;
+		"apply" | "a")
+			if [ ! -d "$HOME/.local/bin" ]; then
+				mkdir ~/.local/bin
+			fi
+			cp ./bashrc ~/.bashrc
+			cp ./tmux.conf ~/.tmux.conf
+			if [ ! -d "$HOME/.config/nvim" ]; then
+				mkdir ~/.config/nvim
+			fi
+			if [ ! -d "$HOME/.config/autodark" ]; then
+				mkdir ~/.config/autodark
+			fi
+			if [ ! -d "$HOME/.config/alacritty" ]; then
+				mkdir ~/.config/alacritty
+			fi
+			cp gitconfig ~/.gitconfig
+			cp -r dark ~/.config/autodark/
+			cp -r light ~/.config/autodark/
+			cp init.vim ~/.config/autodark/
+			cp alacritty.yml ~/.config/autodark/
+			cat ~/.config/autodark/alacritty.yml > ~/.config/alacritty/alacritty.yml
+			cat ~/.config/autodark/init.vim > ~/.config/nvim/init.vim
+			cat ~/.config/autodark/dark/alacritty.yml >> ~/.config/alacritty/alacritty.yml
+			cat ~/.config/autodark/dark/init.vim >> ~/.config/nvim/init.vim
+			cat ~/.config/autodark/dark/init.vim >> ~/.config/nvim/init.vim
+			if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+				echo "Vundle not found. Installing."
+				git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+			fi
+			nvim +PluginInstall +qall
+			source ~/.bashrc
+		;;
+		*)
+			echo "help: ./build (c)onsole [(i)nstall|(a)pply]"
+		;;
+	esac
+}
+
+case $1 in
+	"fonts" | "f")
+		fonts $2
 	;;
-	"restore" | "r")
-		print_head "Restoring old vimrc and tmux conf"
-		mv ./vimrc.old ~/.vimrc
-		mv ./tmux.conf.old ~/.tmux.conf
-		mv ./alacritty.yml.old ~/.config/alacritty/alacritty.yml 
-		print_done
+	"console" | "c")
+		console $2
+	;;
+	"autodark" | "a")
+		echo "TODO"
+	;;
+	"everything" | "e")
+		$0 fonts install
+		$0 fonts apply
+		$0 console install
+		$0 console apply
 	;;
 	*)
-		print_help "./build [(i)nstall | (a)ppy | (r)estore ]"
+		echo "./build [(c)onsole | (f)fonts | (a)autodark | (e)verything ]"
 	;;
 esac
