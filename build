@@ -39,7 +39,7 @@ fonts() {
 console() {
 	case $1 in
 		"install" | "i")
-			install alacritty neovim python-pynvim git-delta-bin tmux starship-bin lsd-bin bat
+			install alacritty neovim python-pynvim git-delta-bin tmux starship-bin lsd-bin bat trash-cli
 		;;
 		"apply" | "a")
 			if [ ! -d "$HOME/.local/bin" ]; then
