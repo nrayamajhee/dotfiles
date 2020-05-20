@@ -86,6 +86,9 @@ case $1 in
 	"console" | "c")
 		console $2
 	;;
+	"mouse" | "m")
+		sudo cp ./90-mx-anywhere-on.rule /etc/udev/rules.d/
+	;;
 	"autodark" | "a")
 		echo "TODO"
 	;;
@@ -96,6 +99,6 @@ case $1 in
 		$0 console apply
 	;;
 	*)
-		echo "./build [(c)onsole | (f)fonts | (a)autodark | (e)verything ]"
+		echo "./build [(c)onsole | (f)fonts | (a)autodark | (e)verything | (m)ouse]"
 	;;
 esac
