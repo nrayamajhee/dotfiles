@@ -72,6 +72,3 @@ noremap <c-j> <c-y>
 noremap <c-k> <c-e>
 
 set mouse=a
-
-set background=dark
-let g:airline_solarized_bg='dark'

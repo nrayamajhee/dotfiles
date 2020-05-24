@@ -90,13 +90,30 @@ case $1 in
 		sudo cp ./90-mx-anywhere-on.rule /etc/udev/rules.d/
 	;;
 	"autodark" | "a")
-		echo "TODO"
+		git submodule update --init --recursive
+		cd autodark
+		if [ ! -d "$HOME/.local/bin" ]; then
+			mkdir ~/.local/bin
+		fi
+		install jq
+		if [ ! -d "$HOME/.config/systemd" ]; then
+			mkdir ~/.config/systemd/
+		fi
+		if [ ! -d "$HOME/.config/systemd/user" ]; then
+			mkdir ~/.config/systemd/user
+		fi
+		cp autodark.service ~/.config/systemd/user/
+		cp autodark.timer ~/.config/systemd/user/
+		cp autodark ~/.local/bin/
+		chmod +x ~/.local/bin/autodark
+		systemctl enable --user autodark.timer
 	;;
 	"everything" | "e")
 		$0 fonts install
 		$0 fonts apply
 		$0 console install
 		$0 console apply
+		$0 autodark
 	;;
 	*)
 		echo "./build [(c)onsole | (f)fonts | (a)autodark | (e)verything | (m)ouse]"
