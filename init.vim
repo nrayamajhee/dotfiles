@@ -59,7 +59,7 @@ autocmd FileType rust noremap <buffer> <c-f> :RustFmt<CR>
 vmap <silent># <Plug>NERDCommenterToggle
 map <silent># <Plug>NERDCommenterToggle
 map <C-\> :NERDTreeFocus<CR>
-map <c-s> :AirlineRefresh <bar> :so ~/.vimrc<CR>
+map <c-s> :AirlineRefresh <bar> :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>w <C-w>
 map <c-w> :bd<CR>
 noremap <c-n> :bn<CR>
