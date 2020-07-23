@@ -24,6 +24,7 @@ syntax enable
 colorscheme solarized
 
 set hidden
+set clipboard=unnamedplus
 
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
