@@ -36,6 +36,7 @@ set tabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
+set clipboard+=unnamedplus
 
 set number relativenumber
 let g:NERDTreeWinSize=25
@@ -53,8 +54,10 @@ let g:airline_theme = 'solarized'
 let g:airline#extensions#tabline#enabled=1
 
 autocmd FileType javascript setlocal equalprg=js-beautify\ --stdin
-autocmd FileType vue noremap <buffer> <c-f> :%!vue-formatter<CR>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<CR>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<CR>
 autocmd FileType javascript noremap <buffer> <c-f> :call JsBeautify()<CR>
+autocmd FileType vue noremap <buffer> <c-f> :%!vue-formatter<CR>
 autocmd FileType rust noremap <buffer> <c-f> :RustFmt<CR>
 vmap <silent># <Plug>NERDCommenterToggle
 map <silent># <Plug>NERDCommenterToggle
