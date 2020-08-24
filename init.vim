@@ -1,22 +1,18 @@
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'rust-lang/rust.vim'
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'tikhomirov/vim-glsl'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'dense-analysis/ale'
-Plugin 'posva/vim-vue'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'valloric/YouCompleteMe'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-call vundle#end()
+call plug#begin('~/.vim/plugged')
+Plug 'rust-lang/rust.vim'
+Plug 'sbdchd/neoformat'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tikhomirov/vim-glsl'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'posva/vim-vue'
+Plug 'altercation/vim-colors-solarized'
+Plug 'scrooloose/nerdcommenter'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+call plug#end()
 
 filetype plugin on
 
@@ -54,10 +50,9 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'solarized'
 let g:airline#extensions#tabline#enabled=1
 
-autocmd FileType javascript setlocal equalprg=js-beautify\ --stdin
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<CR>
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<CR>
-autocmd FileType javascript noremap <buffer> <c-f> :call JsBeautify()<CR>
+autocmd FileType javascript noremap <buffer> <c-f> :call jsbeautify<CR>
+autocmd FileType html noremap <buffer> <c-f> :Neoformat htmlbeautify<CR>
+autocmd FileType css noremap <buffer> <c-f> :Neoformat cssbeautify<CR>
 autocmd FileType vue noremap <buffer> <c-f> :%!vue-formatter<CR>
 autocmd FileType rust noremap <buffer> <c-f> :RustFmt<CR>
 vmap <silent># <Plug>NERDCommenterToggle

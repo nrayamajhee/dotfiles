@@ -66,9 +66,9 @@ console() {
 			cat ~/.config/autodark/dark/alacritty.yml >> ~/.config/alacritty/alacritty.yml
 			cat ~/.config/autodark/dark/init.vim >> ~/.config/nvim/init.vim
 			cat ~/.config/autodark/dark/init.vim >> ~/.config/nvim/init.vim
-			if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+			if [ ! -d "$HOME/.vim/plugged" ]; then
 				echo "Vundle not found. Installing."
-				git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+				yay -S neovim-plug
 			fi
 			nvim +PluginInstall +qall
 			source ~/.bashrc
