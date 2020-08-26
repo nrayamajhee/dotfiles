@@ -50,6 +50,17 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'solarized'
 let g:airline#extensions#tabline#enabled=1
 
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
 autocmd FileType javascript noremap <buffer> <c-f> :call jsbeautify<CR>
 autocmd FileType html noremap <buffer> <c-f> :Neoformat htmlbeautify<CR>
 autocmd FileType css noremap <buffer> <c-f> :Neoformat cssbeautify<CR>
