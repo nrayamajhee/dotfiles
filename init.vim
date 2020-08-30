@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
 Plug 'sbdchd/neoformat'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tikhomirov/vim-glsl'

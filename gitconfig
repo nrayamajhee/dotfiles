@@ -1,8 +1,11 @@
 [core]
     pager = delta --dark --theme='Solarized (dark)'
+	editor = nvim
 
 [interactive]
     diffFilter = delta --color-only
+
 [user]
     email = nishan@rayamajhee.com
     name = nrayamajhee
+
