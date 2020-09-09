@@ -62,11 +62,7 @@ inoremap <silent><expr> <Tab>
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
 
-autocmd FileType javascript noremap <buffer> <c-f> :call jsbeautify<CR>
-autocmd FileType html noremap <buffer> <c-f> :Neoformat htmlbeautify<CR>
-autocmd FileType css noremap <buffer> <c-f> :Neoformat cssbeautify<CR>
-autocmd FileType vue noremap <buffer> <c-f> :%!vue-formatter<CR>
-autocmd FileType rust noremap <buffer> <c-f> :RustFmt<CR>
+noremap <buffer> <c-f> :Neoformat <CR>
 vmap <silent># <Plug>NERDCommenterToggle
 map <silent># <Plug>NERDCommenterToggle
 map <C-\> :NERDTreeFocus<CR>
