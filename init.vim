@@ -62,7 +62,7 @@ inoremap <silent><expr> <Tab>
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
 
-noremap <buffer> <c-f> :Neoformat <CR>
+noremap <c-f> :Neoformat <CR>
 vmap <silent># <Plug>NERDCommenterToggle
 map <silent># <Plug>NERDCommenterToggle
 map <C-\> :NERDTreeFocus<CR>
