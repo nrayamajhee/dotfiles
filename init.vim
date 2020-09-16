@@ -63,6 +63,7 @@ inoremap <silent><expr> <Tab>
       \ coc#refresh()
 
 noremap <c-f> :Neoformat <CR>
+autocmd FileType rust noremap <buffer> <c-f> :RustFmt <CR>
 vmap <silent># <Plug>NERDCommenterToggle
 map <silent># <Plug>NERDCommenterToggle
 map <C-\> :NERDTreeFocus<CR>
