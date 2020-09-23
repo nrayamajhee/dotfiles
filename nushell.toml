@@ -1,0 +1,2 @@
+startup = ["alias edit [file] { nvim $file }", "alias suedit [file] {sudo nvim $file}"]
+prompt = "env $(starship prompt)"

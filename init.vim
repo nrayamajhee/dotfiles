@@ -11,7 +11,6 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdcommenter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
 
@@ -43,14 +42,13 @@ autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
 augroup numbertoggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  autocmd FocusGained,InsertLeave * set relativenumber
+  autocmd FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'solarized'
 let g:airline#extensions#tabline#enabled=1
-
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -66,7 +64,7 @@ noremap <c-f> :Neoformat <CR>
 autocmd FileType rust noremap <buffer> <c-f> :RustFmt <CR>
 vmap <silent># <Plug>NERDCommenterToggle
 map <silent># <Plug>NERDCommenterToggle
-map <C-\> :NERDTreeFocus<CR>
+map <C-\> :CocCommand explorer --toggle --sources=buffer+,file+ --width 30<CR>
 map <c-s> :AirlineRefresh <bar> :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>w <C-w>
 map <c-w> :bd<CR>
