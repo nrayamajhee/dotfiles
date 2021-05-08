@@ -1,18 +1,18 @@
 #!/bin/sh
 
 install() {
-	if [ "$(pacman -Qsq yay-bin)" == "" ]; then
+	if [ "$(pacman -Qsq paru-bin)" == "" ]; then
 		echo "Yay is not installed on system. Installing it."
 		if [ "$(pacman -Qsq git)" == "" ]; then
 			echo "Git is not installed on system. Installing it and base-devel."
 			pacman -S --needed --noconfirm git base-devel
 		fi
-		git clone https://aur.archlinux.org/yay-bin.git
-		cd yay-bin
+		git clone https://aur.archlinux.org/paru-bin.git
+		cd paru-bin
 		makepkg -sri --noconfirm
 		cd ../
 	fi
-	yay -S --noconfirm --needed $@
+	paru -S --noconfirm --needed $@
 }
 
 fonts() {
@@ -68,7 +68,7 @@ console() {
 			cat ~/.config/autodark/dark/init.vim >> ~/.config/nvim/init.vim
 			if [ ! -d "$HOME/.vim/plugged" ]; then
 				echo "Plugged not found. Installing."
-				yay -S neovim-plug
+				paru -S neovim-plug
 			fi
 			nvim +PluginInstall +qall
 			nvim +CocInstall coc-explorer +qall
