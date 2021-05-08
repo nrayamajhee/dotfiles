@@ -1,0 +1,16 @@
+#!/bin/sh
+
+function reset_audio {
+	echo "Woke up from suspend!"
+	echo "Reloading sound kernel modules..."
+	sudo rmmod -f snd_hda_intel snd_hda_codec_hdmi 
+	sleep 2
+	sudo modprobe snd_hda_intel snd_hda_codec_hdmi 
+	echo "Sound kernel modules reloaded."
+}
+
+reset_audio
+
+
+
+

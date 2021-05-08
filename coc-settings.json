@@ -1,3 +1,8 @@
 {
-	"explorer.icon.enableNerdfont": true
+  "explorer.icon.enableNerdfont": true,
+  "rust-analyzer.inlayHints.enable": false,
+  "rust-analyzer.diagnostics.disabled": [
+    "unresolved-proc-macro",
+    "missing-unsafe"
+  ]
 }

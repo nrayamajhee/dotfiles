@@ -1,0 +1,11 @@
+"xte 'keydown Page_Down'"
+b:9
+
+"xte 'keyup Page_Down'"
+b:9 + release
+
+"xte 'keydown Page_Up'"
+b:8
+
+"xte 'keyup Page_Up'"
+b:8 + release
