@@ -17,6 +17,7 @@ Plug 'ayu-theme/ayu-vim'
 call plug#end()
 
 filetype plugin on
+setlocal spell spelllang=en_us
 
 "Editor Looks
 syntax enable
@@ -85,3 +86,10 @@ noremap K <c-u>
 noremap L J  
 noremap <c-j> <c-y> 
 noremap <c-k> <c-e>
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+let ayucolor="dark"
