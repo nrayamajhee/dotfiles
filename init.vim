@@ -20,6 +20,7 @@ filetype plugin on
 
 "Editor Looks
 syntax enable
+setlocal spell spelllang=en_us
 colorscheme ayu
 set termguicolors
 
