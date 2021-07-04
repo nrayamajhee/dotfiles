@@ -9,3 +9,8 @@
     email = nishan@rayamajhee.com
     name = nrayamajhee
 
+[alias]
+	cp = !sh -c 'git commit -m \"$0\" && git push'
+	ri = !sh -c 'git rebase -i HEAD~$0'
+	as = !sh -c 'git add . && git status'
+	df = diff --staged
