@@ -1,5 +1,5 @@
 prompt = "echo (starship prompt)"
-startup = ["alias edit = nvim", "alias suedit = sudo nvim", "alias pac = paru", "alias sys = sudo systemctl", "alias cat = bat -pp"]
+startup = ["alias edit = nvim", "alias suedit = sudo nvim", "alias pac = paru", "alias sys = sudo systemctl", "alias cat = bat -pp", "alias rm = trash"]
 
 [env]
 CARGO_TARGET_DIR = "/home/nishan/.cargo/target"

@@ -1,6 +1,9 @@
 {
   "explorer.icon.enableNerdfont": true,
   "rust-analyzer.inlayHints.enable": false,
+  "explorer.keyMappings.global": {
+    "<c-n>": "noop"
+  },
   "rust-analyzer.diagnostics.disabled": [
     "unresolved-proc-macro",
     "missing-unsafe"

@@ -1,121 +1,129 @@
 #!/bin/sh
 
 install() {
-	if [ "$(pacman -Qsq paru-bin)" == "" ]; then
-		echo "Yay is not installed on system. Installing it."
-		if [ "$(pacman -Qsq git)" == "" ]; then
-			echo "Git is not installed on system. Installing it and base-devel."
-			pacman -S --needed --noconfirm git base-devel
-		fi
-		git clone https://aur.archlinux.org/paru-bin.git
-		cd paru-bin
-		makepkg -sri --noconfirm
-		cd ../
-	fi
-	paru -S --noconfirm --needed $@
+    if [ "$(pacman -Qsq paru-bin)" == "" ]; then
+        echo "Paru is not installed on system. Installing it."
+        if [ "$(pacman -Qsq git)" == "" ]; then
+            echo "Git is not installed on system. Installing it and base-devel."
+            pacman -S --needed --noconfirm git base-devel
+        fi
+        git clone https://aur.archlinux.org/paru-bin.git
+        cd paru-bin
+        makepkg -sri --noconfirm
+        cd ../
+    fi
+    paru -S --noconfirm --needed $@
 }
 
 fonts() {
-	case $1 in
-		"install" | "i")
-			install ttf-merriweather ttf-fira-sans noto-fonts-emoji powerline-fonts-git nerd-fonts-fira-mono nushell-bin
-		;;
-		"apply" | "a")
-			if [ ! -d "$HOME/.config/fontconfig" ]; then
-				mkdir ~/.config/fontconfig
-			fi
-			cp ./fonts.conf ~/.config/fontconfig/
-			fc-cache
-			cat "Sans is: `fc-match sans`"
-			cat "Serif is: `fc-match serif`"
-			cat "Monospace is: `fc-match mono`"
-		;;
-		*)
-			echo "help: ./build (f)fonts [(i)nstall|(a)pply]"
-		;;
-	esac
+    case $1 in
+    "install" | "i")
+        install ttf-crimson-pro noto-fonts noto-fonts-extra noto-fonts-emoji powerline-fonts-git nerd-fonts-cascadia-code 
+        ;;
+    "apply" | "a")
+        if [ ! -d "$HOME/.config/fontconfig" ]; then
+            mkdir ~/.config/fontconfig
+        fi
+        cp ./fonts.conf ~/.config/fontconfig/
+        fc-cache
+        echo "Sans is: $(fc-match sans)"
+        echo "Serif is: $(fc-match serif)"
+        echo "Monospace is: $(fc-match mono)"
+        ;;
+    "both" | "b")
+        $0 fonts install
+        $0 fonts apply
+        ;;
+    *)
+        echo "help: ./build (f)fonts [(i)nstall|(a)pply|(b)oth]"
+        ;;
+    esac
 }
 
 console() {
-	case $1 in
-		"install" | "i")
-			install alacritty neovim python-pynvim git-delta-bin tmux starship-bin bat trash-cli
-		;;
-		"apply" | "a")
-			if [ ! -d "$HOME/.local/bin" ]; then
-				mkdir ~/.local/bin
-			fi
-			cp ./tmux.conf ~/.tmux.conf
-			if [ ! -d "$HOME/.config/nvim" ]; then
-				mkdir ~/.config/nvim
-			fi
-			if [ ! -d "$HOME/.config/autodark" ]; then
-				mkdir ~/.config/autodark
-			fi
-			if [ ! -d "$HOME/.config/alacritty" ]; then
-				mkdir ~/.config/alacritty
-			fi
-			cp gitconfig ~/.gitconfig
-			cp -r dark ~/.config/autodark/
-			cp -r light ~/.config/autodark/
-			cp init.vim ~/.config/autodark/
-			cp alacritty.yml ~/.config/autodark/
-			cat nushell.toml | cat - ~/.config/nu/config.toml > temp && mv temp ~/.config/nu/config.toml
-			cat ~/.config/autodark/alacritty.yml > ~/.config/alacritty/alacritty.yml
-			cat ~/.config/autodark/init.vim > ~/.config/nvim/init.vim
-			cat ~/.config/autodark/dark/alacritty.yml >> ~/.config/alacritty/alacritty.yml
-			cat ~/.config/autodark/dark/init.vim >> ~/.config/nvim/init.vim
-			cat ~/.config/autodark/dark/init.vim >> ~/.config/nvim/init.vim
-			if [ ! -d "$HOME/.vim/plugged" ]; then
-				echo "Plugged not found. Installing."
-				paru -S neovim-plug
-			fi
-			nvim +PluginInstall +qall
-			nvim +CocInstall coc-explorer +qall
-		;;
-		*)
-			echo "help: ./build (c)onsole [(i)nstall|(a)pply]"
-		;;
-	esac
+    case $1 in
+    "install" | "i")
+        install alacritty nushell-bin neovim python-pynvim git-delta ripgrep tmux starship bat trash-cli rustup npm
+        if [ ! -d "$HOME/.vim/plugged" ]; then
+            echo "Plugged not found. Installing."
+            install neovim-plug
+        fi
+        ;;
+    "apply" | "a")
+        if [ ! -d "$HOME/.local/bin" ]; then
+            mkdir ~/.local/bin
+        fi
+        cp ./tmux.conf ~/.tmux.conf
+        if [ ! -d "$HOME/.config/nvim" ]; then
+            mkdir ~/.config/nvim
+        fi
+        if [ ! -d "$HOME/.config/alacritty" ]; then
+            mkdir ~/.config/alacritty
+        fi
+        if [ ! -d "$HOME/.config/nu" ]; then
+            mkdir ~/.config/nu
+        fi
+        cp gitconfig ~/.gitconfig
+        cp coc-settings.json ~/.config/nvim/
+        cat alacritty.yml >~/.config/alacritty/alacritty.yml
+        cat init.vim >~/.config/nvim/init.vim
+        cat dark/alacritty.yml >>~/.config/alacritty/alacritty.yml
+        cat dark/init.vim >>~/.config/nvim/init.vim
+        nvim +PlugInstall\ --sync +qall
+        nvim +CocInstall\ -sync\ coc-explorer\ coc-rust-analyzer\ coc-prettier +qall
+        cat nushell.toml >~/.config/nu/config.toml
+        chsh -s /bin/nu $USER
+        echo "Nushell configured!"
+        echo "Don't forget to run 'config set path $nu.path' and 'config set $nu.env'"
+        ;;
+    "both" | "b")
+        $0 console install
+        $0 console apply
+        ;;
+    *)
+        echo "help: ./build (c)onsole [(i)nstall|(a)pply|(b)oth]"
+        ;;
+    esac
 }
 
 case $1 in
-	"fonts" | "f")
-		fonts $2
-	;;
-	"console" | "c")
-		console $2
-	;;
-	"mouse" | "m")
-		sudo cp ./90-mx-anywhere-on.rule /etc/udev/rules.d/
-	;;
-	"autodark" | "a")
-		git submodule update --init --recursive
-		cd autodark
-		if [ ! -d "$HOME/.local/bin" ]; then
-			mkdir ~/.local/bin
-		fi
-		install jq
-		if [ ! -d "$HOME/.config/systemd" ]; then
-			mkdir ~/.config/systemd/
-		fi
-		if [ ! -d "$HOME/.config/systemd/user" ]; then
-			mkdir ~/.config/systemd/user
-		fi
-		cp autodark.service ~/.config/systemd/user/
-		cp autodark.timer ~/.config/systemd/user/
-		cp autodark ~/.local/bin/
-		chmod +x ~/.local/bin/autodark
-		systemctl enable --user autodark.timer
-	;;
-	"everything" | "e")
-		$0 fonts install
-		$0 fonts apply
-		$0 console install
-		$0 console apply
-		$0 autodark
-	;;
-	*)
-		echo "./build [(c)onsole | (f)fonts | (a)autodark | (e)verything | (m)ouse]"
-	;;
+"fonts" | "f")
+    fonts $2
+    ;;
+"console" | "c")
+    console $2
+    ;;
+"mouse" | "m")
+    sudo cp ./90-mx-anywhere-on.rule /etc/udev/rules.d/
+    ;;
+"autodark" | "a")
+    git submodule update --init --recursive
+    cd autodark
+    if [ ! -d "$HOME/.config/autodark" ]; then
+        mkdir ~/.config/autodark
+    fi
+    install jq
+    if [ ! -d "$HOME/.config/systemd" ]; then
+        mkdir ~/.config/systemd/
+    fi
+    if [ ! -d "$HOME/.config/systemd/user" ]; then
+        mkdir ~/.config/systemd/user
+    fi
+    cp -r dark ~/.config/autodark/
+    cp -r light ~/.config/autodark/
+    cp autodark.service ~/.config/systemd/user/
+    cp autodark.timer ~/.config/systemd/user/
+    cp autodark ~/.local/bin/
+    cp init.vim ~/.config/autodark/
+    cp alacritty.yml ~/.config/autodark/
+    chmod +x ~/.local/bin/autodark
+    systemctl enable --user autodark.timer
+    ;;
+"defaults" | "d")
+    $0 fonts both
+    $0 console both
+    ;;
+*)
+    echo "./build [(c)onsole | (f)fonts | (d)efaults | (a)autodark | (m)ouse]"
+    ;;
 esac
