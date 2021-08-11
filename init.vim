@@ -76,6 +76,7 @@ vmap <silent># <Plug>NERDCommenterToggle
 map <silent># <Plug>NERDCommenterToggle
 map <C-\> :CocCommand explorer --toggle --sources=buffer+,file+ --width 30<CR>
 map <c-s> :AirlineRefresh <bar> :so ~/.config/nvim/init.vim<CR>
+noremap <C-h> :nohlsearch <CR>
 nnoremap <Leader>w <C-w>
 map <c-w> :bd<CR>
 noremap <c-n> :bn<CR>
