@@ -13,7 +13,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'ayu-theme/ayu-vim'
 call plug#end()
 
-
 "Editing
 syntax enable
 filetype plugin on
