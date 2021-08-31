@@ -7,29 +7,23 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tikhomirov/vim-glsl'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'posva/vim-vue'
 Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdcommenter'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ayu-theme/ayu-vim'
 call plug#end()
 
-filetype plugin on
-setlocal spell spelllang=en_us
-
-"Editor Looks
-syntax enable
-setlocal spell spelllang=en_us
-colorscheme ayu
-set termguicolors
 
 "Editing
+syntax enable
+filetype plugin on
+setlocal spell spelllang=en_us
+set termguicolors
 set mouse=a
 set hidden
-set tabstop=4
-set shiftwidth=4
+set expandtab
+set tabstop=2
+set shiftwidth=2
 set autoindent
 set smartindent
 set clipboard+=unnamedplus
@@ -48,9 +42,8 @@ let g:airline_left_alt_sep = '|'
 let g:airline_right_alt_sep = ''
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'ayu_mirage'
+let g:airline_detect_spell=0
 let g:airline#extensions#tabline#enabled=1
-
-let g:NERDTreeWinSize=25
 
 " Detect fs vs files as glsl
 autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
@@ -68,8 +61,8 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
+"Key Bindings
 
-"Key Bdingings
 noremap <c-f> :Neoformat <CR>
 autocmd FileType rust noremap <buffer> <c-f> :RustFmt <CR>
 vmap <silent># <Plug>NERDCommenterToggle
@@ -78,6 +71,14 @@ map <C-\> :CocCommand explorer --toggle --sources=buffer+,file+ --width 30<CR>
 map <c-s> :AirlineRefresh <bar> :so ~/.config/nvim/init.vim<CR>
 noremap <C-h> :nohlsearch <CR>
 nnoremap <Leader>w <C-w>
+
+" CoC
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Navigation
 map <c-w> :bd<CR>
 noremap <c-n> :bn<CR>
 noremap <c-p> :bp<CR>
@@ -88,9 +89,10 @@ noremap L J
 noremap <c-j> <c-y> 
 noremap <c-k> <c-e>
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" Typescript
+let g:neoformat_run_all_formatters = 1
+let g:neoformat_enabled_typescript = ['prettier']
 
+" Color Scheme
+colorscheme ayu
 let ayucolor="dark"
