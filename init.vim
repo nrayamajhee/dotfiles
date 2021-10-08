@@ -7,17 +7,26 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tikhomirov/vim-glsl'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'posva/vim-vue'
 Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdcommenter'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ayu-theme/ayu-vim'
 call plug#end()
 
-"Editing
-syntax enable
 filetype plugin on
+
+"Editor Looks
+syntax enable
 setlocal spell spelllang=en_us
+colorscheme ayu
 set termguicolors
+highlight Normal guibg=none
+highlight NonText guibg=none
+
+"Editing
 set mouse=a
 set hidden
 set expandtab
@@ -32,6 +41,8 @@ augroup numbertoggle
   autocmd FocusGained,InsertLeave * set relativenumber
   autocmd FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
+autocmd FileType netrw setl bufhidden=wipe
 
 
 "Airline Vim
@@ -60,8 +71,8 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-"Key Bindings
 
+"Key Bdingings
 noremap <c-f> :Neoformat <CR>
 autocmd FileType rust noremap <buffer> <c-f> :RustFmt <CR>
 vmap <silent># <Plug>NERDCommenterToggle
@@ -70,17 +81,9 @@ map <C-\> :CocCommand explorer --toggle --sources=buffer+,file+ --width 30<CR>
 map <c-s> :AirlineRefresh <bar> :so ~/.config/nvim/init.vim<CR>
 noremap <C-h> :nohlsearch <CR>
 nnoremap <Leader>w <C-w>
-
-" CoC
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Navigation
-map <c-w> :bd<CR>
-noremap <c-n> :bn<CR>
-noremap <c-p> :bp<CR>
+map <silent> <c-w> :bd<CR>
+noremap <silent> <c-n> :bn<CR>
+noremap <silent> <c-p> :bp<CR>
 inoremap jj <ESC>
 noremap J <c-d>
 noremap K <c-u>
@@ -88,10 +91,17 @@ noremap L J
 noremap <c-j> <c-y> 
 noremap <c-k> <c-e>
 
-" Typescript
+nmap ck :s#\(\<\u\l\+\\|\l\+\)\(\u\)#\l\1-\l\2#g<CR>
+nmap cs :s#\(\<\u\l\+\\|\l\+\)\(\u\)#\l\1_\l\2#g<CR>
+
+nmap <space> <bslash>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 let g:neoformat_run_all_formatters = 1
 let g:neoformat_enabled_typescript = ['prettier']
 
-" Color Scheme
-colorscheme ayu
 let ayucolor="dark"
+let loaded_netrwPlugin = 1
