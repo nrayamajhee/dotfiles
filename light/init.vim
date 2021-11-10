@@ -1,3 +1,3 @@
 colorscheme solarized
-let g:airline_theme = 'solarized'
-let ayucolor="light"
+let g:airline_theme=solarized
+let background=light
