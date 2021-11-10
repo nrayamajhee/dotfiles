@@ -98,7 +98,6 @@ case $1 in
     ;;
 "autodark" | "a")
     git submodule update --init --recursive
-    cd autodark
     if [ ! -d "$HOME/.config/autodark" ]; then
         mkdir ~/.config/autodark
     fi
@@ -111,11 +110,12 @@ case $1 in
     fi
     cp -r dark ~/.config/autodark/
     cp -r light ~/.config/autodark/
+    cp init.vim ~/.config/autodark/
+    cp alacritty.yml ~/.config/autodark/
+	cd autodark
     cp autodark.service ~/.config/systemd/user/
     cp autodark.timer ~/.config/systemd/user/
     cp autodark ~/.local/bin/
-    cp init.vim ~/.config/autodark/
-    cp alacritty.yml ~/.config/autodark/
     chmod +x ~/.local/bin/autodark
     systemctl enable --user autodark.timer
     ;;
