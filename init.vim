@@ -23,6 +23,7 @@ filetype plugin on
 "Editor Looks
 syntax enable
 setlocal spell spelllang=en_us
+colorscheme ayu
 set termguicolors
 highlight Normal guibg=none
 highlight NonText guibg=none
@@ -52,6 +53,7 @@ let g:airline_right_sep = ''
 let g:airline_left_alt_sep = '|'
 let g:airline_right_alt_sep = ''
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'ayu_mirage'
 let g:airline_detect_spell=0
 let g:airline#extensions#tabline#enabled=1
 
@@ -98,6 +100,7 @@ nmap cs :s#\(\<\u\l\+\\|\l\+\)\(\u\)#\l\1_\l\2#g<CR>
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+
 nmap <space> <bslash>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -106,6 +109,6 @@ nmap <silent> gr <Plug>(coc-references)
 
 let g:neoformat_run_all_formatters = 1
 let g:neoformat_enabled_typescript = ['prettier']
-let g:neoformat_enabled_typescriptreact = ['prettier']
 
+let ayucolor="dark"
 let loaded_netrwPlugin = 1
