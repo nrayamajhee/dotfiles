@@ -104,6 +104,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <leader> r <Plug>(coc-rename)
 
 let g:neoformat_run_all_formatters = 1
 let g:neoformat_enabled_typescript = ['prettier']
