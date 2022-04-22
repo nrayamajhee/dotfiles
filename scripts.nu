@@ -1,10 +1,8 @@
-#!/bin/nu
-
 export def disp [color: string text: string] {
   $"(ansi $color)($text)(ansi white)"
 }
 
-export def bright [val: string]  {
+export def bright [val?: string]  {
   if $val == "init" {
     if (ls /dev/ | find i2c | length) > 0 {
       disp green "Modules already Loaded"
@@ -39,3 +37,4 @@ export def headfo []  {
   echo $PID
   pactl set-default-sink $PID
 }
+
