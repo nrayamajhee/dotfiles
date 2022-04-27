@@ -1,16 +1,27 @@
 [core]
-    pager = delta --dark --theme='Solarized (dark)'
-	editor = nvim
-
-[interactive]
-    diffFilter = delta --color-only
+  editor = nvim
+  pager = delta
 
 [user]
-    email = nishan@rayamajhee.com
-    name = nrayamajhee
+  email = nishan@rayamajhee.com
+  name = nrayamajhee
 
 [alias]
+	sw = !sh -c 'git stash && git checkout \"$0\"'
 	cp = !sh -c 'git commit -m \"$0\" && git push'
 	ri = !sh -c 'git rebase -i HEAD~$0'
 	as = !sh -c 'git add . && git status'
+	di = diff
 	df = diff --staged
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true  # use n and N to move between diff sections
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
