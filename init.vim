@@ -90,8 +90,9 @@ inoremap jj <ESC>
 noremap J <c-d>
 noremap K <c-u>
 noremap L J  
-noremap <c-j> <c-y> 
-noremap <c-k> <c-e>
+noremap <c-k> <c-y> 
+noremap <c-j> <c-e>
+noremap <c-e> $
 
 nmap ck :s#\(\<\u\l\+\\|\l\+\)\(\u\)#\l\1-\l\2#g<CR>
 nmap cs :s#\(\<\u\l\+\\|\l\+\)\(\u\)#\l\1_\l\2#g<CR>
