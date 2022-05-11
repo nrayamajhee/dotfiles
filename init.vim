@@ -24,8 +24,6 @@ filetype plugin on
 syntax enable
 setlocal spell spelllang=en_us
 set termguicolors
-highlight Normal guibg=none
-highlight NonText guibg=none
 
 "Editing
 set mouse=a
@@ -115,3 +113,6 @@ let loaded_netrwPlugin = 1
 colorscheme ayu
 let g:airline_theme = 'ayu_mirage'
 let ayucolor="dark"
+
+hi! Normal ctermbg=none ctermfg=none guifg=none guibg=none
+hi! LineNr ctermbg=none ctermfg=none guifg=none guibg=none
