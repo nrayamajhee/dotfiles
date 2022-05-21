@@ -8,4 +8,4 @@ shell:
   program: /bin/nu
   args:
     - -c
-    - "tmux attach"
+    - "TERM=screen-256color tmux"

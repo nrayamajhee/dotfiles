@@ -7,5 +7,6 @@
   "rust-analyzer.diagnostics.disabled": [
     "unresolved-proc-macro",
     "missing-unsafe"
-  ]
+  ],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "html", "typescipt", "typescriptreact", "javascript"]
 }

@@ -72,8 +72,6 @@ endfunction
 
 
 "Key Bdingings
-noremap <c-f> :Neoformat <CR>
-autocmd FileType rust noremap <buffer> <c-f> :RustFmt <CR>
 vmap <silent># <Plug>NERDCommenterToggle
 map <silent># <Plug>NERDCommenterToggle
 map <C-\> :CocCommand explorer --toggle --sources=buffer+,file+ --width 30<CR>
@@ -103,16 +101,26 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <leader> r <Plug>(coc-rename)
-
-let g:neoformat_run_all_formatters = 1
-let g:neoformat_enabled_typescript = ['prettier']
-let g:neoformat_enabled_typescriptreact = ['prettier']
+nmap <leader>rr <Plug>(coc-rename)
+nmap <leader>ff :Files <CR>
+nmap <leader>ss :Rg <CR>
 
 let loaded_netrwPlugin = 1
 colorscheme ayu
 let g:airline_theme = 'ayu_mirage'
 let ayucolor="dark"
 
+au Filetype rust noremap <buffer> <c-f> :RustFmt <CR>
+au Filetype typescriptreact,typescript,html,css,javascript,markdown noremap <buffer> <c-f> :CocCommand prettier.forceFormatDocument <CR>
+
+let g:rustfmt_autosave = 1
+
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
 hi! Normal ctermbg=none ctermfg=none guifg=none guibg=none
 hi! LineNr ctermbg=none ctermfg=none guifg=none guibg=none
+
