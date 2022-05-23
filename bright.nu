@@ -1,8 +1,10 @@
-export def disp [color: string text: string] {
+#!/usr/bin/env nu
+
+def disp [color: string text: string] {
   $"(ansi $color)($text)(ansi white)"
 }
 
-export def bright [val?: string]  {
+def main [val?: string]  {
   if $val == "init" {
     if (ls /dev/ | find i2c | length) > 0 {
       disp green "Modules already Loaded"
@@ -36,12 +38,3 @@ export def bright [val?: string]  {
     sudo ddcutil getvcp -d 2 10 | rg "current value"
   }
 }
-
-export def headfo []  {
-  let ID = "CC:98:8B:B7:E7:1E"
-  bluetoothctl connect $ID
-  let PID = "$(echo bluez_output.$(echo $ID | sed -e 's/:/_/g').a2dp-sink)"
-  echo $PID
-  pactl set-default-sink $PID
-}
-
