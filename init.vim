@@ -111,9 +111,9 @@ let g:airline_theme = 'ayu_mirage'
 let ayucolor="dark"
 
 au Filetype rust noremap <buffer> <c-f> :RustFmt <CR>
-au Filetype typescriptreact,typescript,html,css,javascript,markdown noremap <buffer> <c-f> :CocCommand prettier.forceFormatDocument <CR>
+au Filetype typescriptreact,typescript,html,css,javascript,markdown,svg noremap <buffer> <c-f> :CocCommand prettier.forceFormatDocument <CR>
 
-let g:rustfmt_autosave = 1
+let g:rust_recommended_style = 0
 
 if exists('+termguicolors')
   let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
