@@ -76,8 +76,8 @@ vmap <silent># <Plug>NERDCommenterToggle
 map <silent># <Plug>NERDCommenterToggle
 map <C-\> :CocCommand explorer --toggle --sources=buffer+,file+ --width 30<CR>
 map <c-s> :AirlineRefresh <bar> :so ~/.config/nvim/init.vim<CR>
-noremap <C-/> :nohlsearch <CR>
-noremap <C-H> :CocCommand rest-client.request <CR>
+noremap <C-g> :nohlsearch <CR>
+noremap <C-h> :CocCommand rest-client.request <CR>
 nnoremap <Leader>w <C-w>
 map <silent> <c-w> :bd<CR>
 noremap <silent> <c-n> :bn<CR>

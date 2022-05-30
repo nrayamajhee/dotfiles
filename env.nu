@@ -20,4 +20,4 @@ alias rm = trash
 alias checkout = git-interactive-checkout
 
 let-env CARGO_TARGET_DIR = '/home/nishan/.cargo/target'
-let-env PATH = ($env.PATH | append "/home/nishan/.local/bin" | append "/home/nishan/.cargo/bin")
+let-env PATH = ($env.PATH | append "/home/nishan/.local/bin" | append "/home/nishan/.cargo/bin" | append "/home/nishan/.local/share/gem/ruby/3.0.0/bin")
