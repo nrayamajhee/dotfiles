@@ -3,7 +3,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'sbdchd/neoformat'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tikhomirov/vim-glsl'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -115,7 +114,7 @@ let g:airline_theme = 'ayu_mirage'
 let ayucolor="dark"
 
 au Filetype rust noremap <buffer> <c-f> :RustFmt <CR>
-au Filetype typescriptreact,typescript,html,css,javascript,markdown,svg noremap <buffer> <c-f> :CocCommand prettier.forceFormatDocument <CR>
+noremap <c-f> :Neoformat <CR>
 
 let g:rust_recommended_style = 0
 
