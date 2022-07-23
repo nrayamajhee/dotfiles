@@ -70,7 +70,7 @@ console() {
         cat dark/alacritty.yml >>~/.config/alacritty/alacritty.yml
         cat dark/init.vim >>~/.config/nvim/init.vim
         nvim +PlugInstall\ --sync +qall
-        nvim +CocInstall\ pwd-sync\ coc-explorer\ coc-rust-analyzer\ coc-tsserver\ coc-json +qall
+        nvim +CocInstall\ pwd-sync\ coc-rust-analyzer\ coc-tsserver\ coc-json +qall
         echo "Nushell configuration needed!"
         echo "Please make sure to run chsh -s /bin/nu $USER"
         echo "source $(pwd)/env.nu" >> ~/.config/nushell/env.nu
