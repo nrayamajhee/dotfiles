@@ -1,7 +1,0 @@
-ACTION=="change"\
-, SUBSYSTEM=="power_supply"\
-, ENV{POWER_SUPPLY_MODEL_NAME}=="Wireless Mobile Mouse MX Anywhere 2S"\
-, ENV{POWER_SUPPLY_ONLINE}=="1"\
-, ENV{POWER_SUPPLY_STATUS}=="Discharging"\
-, RUN+="/usr/bin/su root -c 'solaar config 1 dpi 2400'"
-

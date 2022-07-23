@@ -2,11 +2,11 @@
   "explorer.icon.enableNerdfont": true,
   "rust-analyzer.inlayHints.enable": false,
   "explorer.keyMappings.global": {
-    "<c-n>": "noop"
+    "<c-n>": "noop",
+    "<c-p>": "noop"
   },
   "rust-analyzer.diagnostics.disabled": [
     "unresolved-proc-macro",
     "missing-unsafe"
-  ],
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "html", "typescipt", "typescriptreact", "javascript"]
+  ]
 }

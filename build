@@ -60,8 +60,8 @@ console() {
         if [ ! -d "$HOME/.config/alacritty" ]; then
             mkdir ~/.config/alacritty
         fi
-        if [ ! -d "$HOME/.config/nu" ]; then
-            mkdir ~/.config/nu
+        if [ ! -d "$HOME/.config/nushell" ]; then
+            mkdir ~/.config/nushell
         fi
         cp gitconfig ~/.gitconfig
         cp coc-settings.json ~/.config/nvim/
@@ -70,11 +70,10 @@ console() {
         cat dark/alacritty.yml >>~/.config/alacritty/alacritty.yml
         cat dark/init.vim >>~/.config/nvim/init.vim
         nvim +PlugInstall\ --sync +qall
-        nvim +CocInstall\ -sync\ coc-explorer\ coc-rust-analyzer\ coc-prettier +qall
-        cat nushell.toml >~/.config/nu/config.toml
-        chsh -s /bin/nu $USER
-        echo "Nushell configured!"
-        echo "Don't forget to run 'config set path $nu.path' and 'config set $nu.env'"
+        nvim +CocInstall\ pwd-sync\ coc-explorer\ coc-rust-analyzer\ coc-tsserver\ coc-json +qall
+        echo "Nushell configuration needed!"
+        echo "Please make sure to run chsh -s /bin/nu $USER"
+        echo "source $(pwd)/env.nu" >> ~/.config/nushell/env.nu
         ;;
     "both" | "b")
         $0 console install
@@ -86,44 +85,45 @@ console() {
     esac
 }
 
+autodark() {
+  git submodule update --init --recursive
+  if [ ! -d "$HOME/.config/autodark" ]; then
+  mkdir ~/.config/autodark
+  fi
+  install jq
+  if [ ! -d "$HOME/.config/systemd" ]; then
+  mkdir ~/.config/systemd/
+  fi
+  if [ ! -d "$HOME/.config/systemd/user" ]; then
+  mkdir ~/.config/systemd/user
+  fi
+  cp -r dark ~/.config/autodark/
+  cp -r light ~/.config/autodark/
+  cp init.vim ~/.config/autodark/
+  cp alacritty.yml ~/.config/autodark/
+  cd autodark
+  cp autodark.service ~/.config/systemd/user/
+  cp autodark.timer ~/.config/systemd/user/
+  cp autodark ~/.local/bin/
+  chmod +x ~/.local/bin/autodark
+  systemctl enable --user autodark.timer
+}
+
 case $1 in
-"fonts" | "f")
+  "fonts" | "f")
     fonts $2
-    ;;
-"console" | "c")
+  ;;
+  "console" | "c")
     console $2
-    ;;
-"mouse" | "m")
-    sudo cp ./90-mx-anywhere-on.rule /etc/udev/rules.d/
-    ;;
-"autodark" | "a")
-    git submodule update --init --recursive
-    if [ ! -d "$HOME/.config/autodark" ]; then
-        mkdir ~/.config/autodark
-    fi
-    install jq
-    if [ ! -d "$HOME/.config/systemd" ]; then
-        mkdir ~/.config/systemd/
-    fi
-    if [ ! -d "$HOME/.config/systemd/user" ]; then
-        mkdir ~/.config/systemd/user
-    fi
-    cp -r dark ~/.config/autodark/
-    cp -r light ~/.config/autodark/
-    cp init.vim ~/.config/autodark/
-    cp alacritty.yml ~/.config/autodark/
-	cd autodark
-    cp autodark.service ~/.config/systemd/user/
-    cp autodark.timer ~/.config/systemd/user/
-    cp autodark ~/.local/bin/
-    chmod +x ~/.local/bin/autodark
-    systemctl enable --user autodark.timer
-    ;;
-"defaults" | "d")
+  ;;
+  "autodark" | "a")
+    autodark
+  ;;
+  "defaults" | "d")
     $0 fonts both
     $0 console both
-    ;;
-*)
-    echo "./build [(c)onsole | (f)fonts | (d)efaults | (a)autodark | (m)ouse]"
-    ;;
+  ;;
+  *)
+    echo "./build [(c)onsole | (f)fonts | (d)efaults | (a)autodark]"
+  ;;
 esac

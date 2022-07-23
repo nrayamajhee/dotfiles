@@ -1,3 +1,3 @@
 colorscheme solarized
-let g:airline_theme=solarized
-let background=light
+let g:airline_theme='base16_solarized_light'
+let background='light'

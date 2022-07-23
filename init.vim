@@ -109,11 +109,7 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 let loaded_netrwPlugin = 1
-colorscheme ayu
-let g:airline_theme = 'ayu_mirage'
-let ayucolor="dark"
 
-au Filetype rust noremap <buffer> <c-f> :RustFmt <CR>
 noremap <c-f> :Neoformat <CR>
 
 let g:rust_recommended_style = 0
