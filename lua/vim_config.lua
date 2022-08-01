@@ -24,14 +24,9 @@ vim.api.nvim_create_autocmd({ "FocusLost", "InsertEnter" }, {
 	pattern = "*",
 	command = "set norelativenumber",
 })
-vim.api.nvim_set_hl(0, "Normal", {
-	bg = "none",
-})
-vim.api.nvim_set_hl(0, "LineNr", {
-	bg = "none",
-})
 --loaded_netrwPlugin  = false
 --vim.api.nvim_create_autocmd('FileType', {
 --pattern = 'netrw',
 --command = "setl bufhidden=wipe"
 --})
+vim.g.transparent_enabled = true

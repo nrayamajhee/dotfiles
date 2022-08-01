@@ -34,4 +34,5 @@ return require("packer").startup(function(use)
 		"tanvirtin/vgit.nvim",
 		requires = "nvim-lua/plenary.nvim",
 	})
+	use("xiyaowong/nvim-transparent")
 end)
