@@ -1,38 +1,38 @@
 key_bindings:
   - { key: H, mods: Alt, chars: "\x1bh" }
-  - { key: L, mods: Alt, chars: "\x1bl" }
   - { key: J, mods: Alt, chars: "\x1bj" }
   - { key: K, mods: Alt, chars: "\x1bk" }
-
-  - { key: H, mods: Alt|Shift, chars: "\x1bH" }
-  - { key: L, mods: Alt|Shift, chars: "\x1bL" }
-  - { key: K, mods: Alt|Shift, chars: "\x1bK" }
-  - { key: J, mods: Alt|Shift, chars: "\x1bJ" }
-
-  - { key: W, mods: Alt, chars: "\x1bw" }
-  - { key: R, mods: Alt, chars: "\x1br" }
+  - { key: L, mods: Alt, chars: "\x1bl" }
   - { key: N, mods: Alt, chars: "\x1bn" }
-  - { key: N, mods: Alt|Shift, chars: "\x1bN" }
   - { key: P, mods: Alt, chars: "\x1bp" }
-
-  - { key: T, mods: Alt, chars: "\x1bt" }
   - { key: S, mods: Alt, chars: "\x1bs" }
+  - { key: R, mods: Alt, chars: "\x1br" }
+  - { key: T, mods: Alt, chars: "\x1bt" }
+  - { key: W, mods: Alt, chars: "\x1bw" }
   - { key: X, mods: Alt, chars: "\x1bx" }
   - { key: Backslash, mods: Alt, chars: "\x1b\\" }
+
+  - { key: H, mods: Alt|Shift, chars: "\x1bH" }
+  - { key: J, mods: Alt|Shift, chars: "\x1bJ" }
+  - { key: L, mods: Alt|Shift, chars: "\x1bL" }
+  - { key: K, mods: Alt|Shift, chars: "\x1bK" }
+  - { key: N, mods: Alt|Shift, chars: "\x1bN" }
   - { key: Backslash, mods: Alt | Shift, chars: "\x1b|" }
 
-  - { key: P, mods: Command, chars: "\x10" }
-  - { key: V, mods: Command|Shift, action: Paste }
-  - { key: V, mods: Command, chars: "\x16" }
-  - { key: N, mods: Command, chars: "\x0e" }
+  - { key: A, mods: Command, chars: "\x01" }
   - { key: B, mods: Command, chars: "\x02" }
-  - { key: G, mods: Command, chars: "\x07" }
-  - { key: S, mods: Command, chars: "\x13" }
-  - { key: W, mods: Command, chars: "\x17" }
-  - { key: L, mods: Command, chars: "\x0c" }
-  - { key: F, mods: Command, chars: "\x06" }
-  - { key: R, mods: Command, chars: "\x12" }
   - { key: C, mods: Command, chars: "\x03" }
+  - { key: E, mods: Command, chars: "\x05" }
+  - { key: F, mods: Command, chars: "\x06" }
+  - { key: G, mods: Command, chars: "\x07" }
   - { key: H, mods: Command|Shift, chars: "\x08" }
+  - { key: L, mods: Command, chars: "\x0c" }
+  - { key: N, mods: Command, chars: "\x0e" }
+  - { key: P, mods: Command, chars: "\x10" }
+  - { key: R, mods: Command, chars: "\x12" }
+  - { key: S, mods: Command, chars: "\x13" }
+  - { key: V, mods: Command, chars: "\x16" }
+  - { key: V, mods: Command|Shift, action: Paste }
+  - { key: W, mods: Command, chars: "\x17" }
   - { key: Backslash, mods: Command, chars: "\x1c" }
-
+  - { key: Slash, mods: Command, chars: "\x1f" }

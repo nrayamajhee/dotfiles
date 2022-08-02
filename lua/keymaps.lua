@@ -1,24 +1,32 @@
-vim.keymap.set("", "<C-\\>", ":NvimTreeFindFileToggle<CR>", { silent = true })
-vim.keymap.set("", "<C-s>", ":Reload<CR>", { noremap = true })
-vim.keymap.set("n", "<C-f>", ":FormatWrite<CR>", { noremap = true })
-vim.keymap.set("n", "<Leader>w", "<C-w>", { noremap = true })
-vim.keymap.set("", "<C-w>", ":bd<CR>", { noremap = true, silent = true })
-vim.keymap.set("", "<C-n>", ":bn<CR>", { noremap = true, silent = true })
-vim.keymap.set("", "<C-p>", ":bp<CR>", { noremap = true, silent = true })
-vim.keymap.set("", "L", "J", { noremap = true })
-vim.keymap.set("", "J", "<C-d>", { noremap = true })
-vim.keymap.set("", "K", "<C-u>", { noremap = true })
-vim.keymap.set("", "<C-k>", "<C-y>", { noremap = true })
-vim.keymap.set("", "<C-j>", "<C-e>", { noremap = true })
-vim.keymap.set("", "<C-e>", "$", { noremap = true })
-vim.keymap.set("", "<C-a>", "0", { noremap = true })
+local set = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+set("", "<C-\\>", ":NvimTreeFindFileToggle<CR>", { silent = true })
+set("", "<C-s>", ":Reload<CR>", { noremap = true })
+set("n", "<C-f>", ":FormatWrite<CR>", { noremap = true })
+set("n", "<Leader>w", "<C-w>", { noremap = true })
+set("", "<C-w>", ":bd<CR>", { noremap = true, silent = true })
+set("", "<C-n>", ":bn<CR>", { noremap = true, silent = true })
+set("", "<C-h>", ":nohlsearch<CR>", { noremap = true, silent = true })
+set("", "<C-p>", ":bp<CR>", { noremap = true, silent = true })
+set("", "L", "J", { noremap = true })
+set("", "J", "<C-d>", { noremap = true })
+set("", "K", "<C-u>", { noremap = true })
+set("", "<C-k>", "<C-y>", { noremap = true })
+set("", "<C-j>", "<C-e>", { noremap = true })
+set("", "<C-e>", "$", { noremap = true })
+set("", "<C-a>", "0", { noremap = true })
 
 -- telescope
-vim.keymap.set("", "<Leader>ff", "<cmd>Telescope find_files<CR>", { noremap = true })
-vim.keymap.set("", "<Leader>fg", "<cmd>Telescope live_grep<CR>", { noremap = true })
-vim.keymap.set("", "<Leader>fb", "<cmd>Telescope buffers<CR>", { noremap = true })
-vim.keymap.set("", "<Leader>fh", "<cmd>Telescope help_tags<CR>", { noremap = true })
+set("", "<Leader>ff", "<cmd>Telescope find_files<CR>", { noremap = true })
+set("", "<Leader>fg", "<cmd>Telescope live_grep<CR>", { noremap = true })
+set("", "<Leader>fb", "<cmd>Telescope buffers<CR>", { noremap = true })
+set("", "<Leader>fh", "<cmd>Telescope help_tags<CR>", { noremap = true })
 
 -- vgit
-vim.keymap.set("", "<Leader>gb", ":VGit toggle_live_blame<CR>", {})
-vim.keymap.set("", "<Leader>gB", ":VGit buffer_gutter_blame_preview<CR>", {})
+set("", "<Leader>gb", ":VGit toggle_live_blame<CR>", {})
+set("", "<Leader>gB", ":VGit buffer_gutter_blame_preview<CR>", {})
+
+-- comment
+set("n", "<C-_>", ":lua require('Comment.api').toggle_current_linewise()<CR>", opts)
+set("x", "<C-_>", ":lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", opts)

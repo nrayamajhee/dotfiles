@@ -44,11 +44,14 @@ require("bufferline").setup({
 	},
 })
 require("Comment").setup({
-	opleader = {
-		line = "<C-_>",
+	mappings = {
+		basic = false,
 	},
 })
 require("vgit").setup()
+vim.o.updatetime = 300
+vim.o.incsearch = false
+vim.wo.signcolumn = 'yes'
 require("transparent").setup({
 	enable = true,
 	extra_groups = {
