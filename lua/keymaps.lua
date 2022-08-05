@@ -3,7 +3,7 @@ local opts = { noremap = true, silent = true }
 
 set("", "<C-\\>", ":NvimTreeFindFileToggle<CR>", { silent = true })
 set("", "<C-s>", ":Reload<CR>", { noremap = true })
-set("n", "<C-f>", ":FormatWrite<CR>", { noremap = true })
+set("", "<C-f>", ":FormatWrite<CR>", { noremap = true })
 set("n", "<Leader>w", "<C-w>", { noremap = true })
 set("", "<C-w>", ":bd<CR>", { noremap = true, silent = true })
 set("", "<C-n>", ":bn<CR>", { noremap = true, silent = true })

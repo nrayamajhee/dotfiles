@@ -41,6 +41,8 @@ require("bufferline").setup({
 		right_mouse_command = "",
 		middle_mouse_command = "bdelete! %d",
 		show_close_icon = false,
+		indicator_icon = "▌",
+		offsets = { { filetype = "NvimTree" } },
 	},
 })
 require("Comment").setup({
@@ -50,8 +52,7 @@ require("Comment").setup({
 })
 require("vgit").setup()
 vim.o.updatetime = 300
-vim.o.incsearch = false
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 require("transparent").setup({
 	enable = true,
 	extra_groups = {

@@ -1,5 +1,5 @@
-require("lsp")
 require("packer_plugins")
 require("load_plugins")
+require("lsp")
 require("vim_config")
 require("keymaps")

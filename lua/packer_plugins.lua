@@ -29,10 +29,14 @@ return require("packer").startup(function(use)
 		requires = "kyazdani42/nvim-web-devicons",
 	})
 	use("numToStr/Comment.nvim")
-	use("neovim/nvim-lspconfig")
 	use({
 		"tanvirtin/vgit.nvim",
 		requires = "nvim-lua/plenary.nvim",
 	})
 	use("xiyaowong/nvim-transparent")
+	use("neovim/nvim-lspconfig")
+	use("hrsh7th/nvim-cmp")
+	use("hrsh7th/cmp-nvim-lsp")
+	use("saadparwaiz1/cmp_luasnip")
+	use("L3MON4D3/LuaSnip")
 end)
