@@ -13,6 +13,8 @@
 	as = !sh -c 'git add . && git status'
 	di = diff
 	df = diff --staged
+	wa = worktree add
+	wr = worktree remove
 
 [interactive]
   diffFilter = delta --color-only
