@@ -38,3 +38,5 @@ set("x", "<C-_>", ":lua require('Comment.api').toggle_linewise_op(vim.fn.visualm
 -- harpoon
 set("", "<Leader>hm", ":lua require('harpoon.mark').add_file()<CR>", {})
 set("", "<Leader>ht", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", si)
+
+set("x", "<Leader>p", "\"_dP", nr)
