@@ -32,8 +32,8 @@ set("", "<Leader>gb", ":VGit toggle_live_blame<CR>", {})
 set("", "<Leader>gB", ":VGit buffer_gutter_blame_preview<CR>", {})
 
 -- comment
-set("n", "<C-_>", ":lua require('Comment.api').toggle_current_linewise()<CR>", opts)
-set("x", "<C-_>", ":lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", nrsi)
+set("n", "<C-_>", ":lua require('Comment.api').toggle.linewise.current()<CR>", opts)
+set("x", "<C-_>", ":lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
 
 -- harpoon
 set("", "<Leader>hm", ":lua require('harpoon.mark').add_file()<CR>", {})
