@@ -1,6 +1,0 @@
-#!/bin/sh
-
-ID="CC:98:8B:B7:E7:1E"
-bluetoothctl connect $ID
-PID="$(echo bluez_sink.$(echo $ID | sed -e 's/:/_/g').a2dp_sink)"
-pacmd set-default-sink $PID
