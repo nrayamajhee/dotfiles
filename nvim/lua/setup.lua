@@ -38,11 +38,12 @@ require("lualine").setup({
 require("nvim-reload")
 require("bufferline").setup({
 	options = {
-		right_mouse_command = "",
-		middle_mouse_command = "bdelete! %d",
-		show_close_icon = false,
-		indicator_icon = "▌",
-		offsets = { { filetype = "NvimTree" } },
+		right_mouse_command = nil,
+		middle_mouse_command = "bd %d",
+		indicator = {
+			icon = "▐ ",
+			style = "icon",
+		},
 	},
 })
 require("Comment").setup({
@@ -65,3 +66,12 @@ require("transparent").setup({
 	},
 	exclude = {},
 })
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "lua", "rust", "typescript", "scala" },
+  sync_install = false,
+  auto_install = true,
+  ignore_install = { "javascript" },
+  highlight = {
+    enable = true,
+  },
+}

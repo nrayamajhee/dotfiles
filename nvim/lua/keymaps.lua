@@ -35,8 +35,5 @@ set("", "<Leader>gB", ":VGit buffer_gutter_blame_preview<CR>", {})
 set("n", "<C-_>", ":lua require('Comment.api').toggle.linewise.current()<CR>", opts)
 set("x", "<C-_>", ":lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
 
--- harpoon
-set("", "<Leader>hm", ":lua require('harpoon.mark').add_file()<CR>", {})
-set("", "<Leader>ht", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", si)
-
+-- paste
 set("x", "<Leader>p", "\"_dP", nr)
