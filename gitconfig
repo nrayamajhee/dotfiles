@@ -15,6 +15,7 @@
 	df = diff --staged
 	wa = worktree add
 	wr = worktree remove
+	wl = worktree list
 
 [interactive]
   diffFilter = delta --color-only
