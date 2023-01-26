@@ -8,6 +8,7 @@ vim.opt.timeoutlen = 1000
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+vim.opt.textwidth=100
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.clipboard = "unnamedplus"
