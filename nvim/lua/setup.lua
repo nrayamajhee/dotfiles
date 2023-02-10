@@ -7,6 +7,9 @@ require("formatter").setup({
 		css = {
 			require("formatter.defaults.prettier"),
 		},
+		json = {
+			require("formatter.defaults.prettier"),
+		},
 		javascript = {
 			require("formatter.defaults.prettier"),
 		},
