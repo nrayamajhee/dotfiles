@@ -5,6 +5,7 @@ vim.opt.mouse = "a"
 vim.g.mapleader = " "
 vim.opt.termguicolors = true
 vim.opt.timeoutlen = 1000
+vim.opt.textwidth = 100
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true

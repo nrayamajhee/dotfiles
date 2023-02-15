@@ -6,6 +6,7 @@ local nrsi = { unpack(nr), unpack(si) }
 set("", "<C-\\>", ":NvimTreeFindFileToggle<CR>", si)
 set("", "<C-s>", ":Reload<CR>", nr)
 set("", "<C-f>", ":FormatWrite<CR>", nr)
+set("n", "<leader>sf", "<cmd>lua vim.lsp.buf.formatting()<CR>", nr)
 set("n", "<Leader>w", "<C-w>", nr)
 set("", "<C-w>", ":bd<CR>", nrsi)
 set("", "<C-n>", ":bn<CR>", nrsi)
