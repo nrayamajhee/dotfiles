@@ -26,7 +26,7 @@ def check_base [] {
 }
 
 def match [var: string, arg: string] {
-  $var == $arg || $var == ($arg | split chars | get 0) || $var == 'yolo' || $var == 'y'
+  $var == $arg or $var == ($arg | split chars | get 0) or $var == 'yolo' or $var == 'y'
 }
 
 def check_paru [] {
@@ -47,7 +47,7 @@ def check_paru [] {
 def main [config?] {
   check_base
   check_paru
-  install_if_unavail [alacritty neovim nvim-packer-git alacritty tmux ttf-crimson-pro ttf nerd-fonts-inconsolata noto-fonts noto-fonts-emoji starship bat ripgrep]
+  install_if_unavail [alacritty neovim nvim-packer-git alacritty tmux ttf-crimson-pro ttf-inconsolata-nerd noto-fonts noto-fonts-emoji starship bat ripgrep]
   if (match $config 'nvim') {
     ln -s (pwd | str trim --all | append "nvim" | str join "/") ~/.config/nvim
     # Packer can't run headless yet
@@ -65,12 +65,12 @@ def main [config?] {
     create_dir_if_unavil ~/.config/fontconfig
     cp fonts.conf ~/.config/fontconfig/
   }
-  if (match $config 'nushell') {
+  if (match $config 'shell') {
     let nu_file = ("~/.config/nushell/env.nu" | path expand)
     let env_file = ("./env.nu" | path expand)
-    open $nu_file | lines | append $"source ($env_file)"  | save $nu_file
+    open $nu_file | lines | append $"source ($env_file)"  | save $nu_file -f
   }
   if $config == null {
-    echo 'install.nu (n)vim | (a)lacritty | (g)it | (f)ont | (n)ushell | (y)olo'
+    echo 'install.nu (n)vim | (a)lacritty | (g)it | (f)ont | (s)hell | (y)olo'
   }
 }
