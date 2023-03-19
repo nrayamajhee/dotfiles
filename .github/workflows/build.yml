@@ -1,0 +1,13 @@
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build-zmk-firmware:
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            keyboard:
+              - 'keyboar/**'
+      - if: steps.changes.outputs.keyboard == 'true'
+        uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
