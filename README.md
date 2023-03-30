@@ -22,7 +22,8 @@ Fonts:
 - [Noto Sans](https://fonts.google.com/noto/specimen/Noto+Sans?query=Noto+Sans)
 - [Inconsolata](https://levien.com/type/myfonts/inconsolata.html)
 
-This repository also contains my custom keyboard configuration for QMK firmware, and git config.
+This repository also contains keyboard configuration for my Lily58 QMK firmware, and git config.
+For my other Lily58's firmware, check out <https://github.com/nrayamajhee/zmk-config>
 
 The install script automates package installations and configurations copy-pasting:
 
