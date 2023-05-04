@@ -51,4 +51,8 @@ require("lazy").setup({
 	},
 	"rafamadriz/friendly-snippets",
 	{ "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
+	{
+		"williamboman/mason.nvim",
+		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
+	},
 })

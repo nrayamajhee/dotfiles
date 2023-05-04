@@ -5,6 +5,7 @@ local nrsi = { unpack(nr), unpack(si) }
 
 --lsp
 
+require("mason").setup()
 local servers = { "tsserver", "rust_analyzer", "metals" }
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 

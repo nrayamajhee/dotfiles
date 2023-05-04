@@ -8,6 +8,7 @@
   "gitsigns.nvim": { "branch": "main", "commit": "e5edefd9976039f5352e0c900f35206770b33a2d" },
   "lazy.nvim": { "branch": "main", "commit": "ceb413678dfcf3d5455208959185e3db1f7892c7" },
   "lualine.nvim": { "branch": "master", "commit": "84ffb80e452d95e2c46fa29a98ea11a240f7843e" },
+  "mason.nvim": { "branch": "main", "commit": "057ac5ca159c83e302a55bd839a96ff1ea2396db" },
   "neovim-ayu": { "branch": "master", "commit": "762ff24bd429fbb1c1e20b13043b4c8f0266bcf1" },
   "nvim-cmp": { "branch": "main", "commit": "8d2f190506013064775ec328377e196ab343ad61" },
   "nvim-lspconfig": { "branch": "master", "commit": "3bd4ca412982afa6f88bb7ef890660cee51c3e58" },
