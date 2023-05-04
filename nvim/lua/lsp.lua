@@ -6,7 +6,7 @@ local nrsi = { unpack(nr), unpack(si) }
 --lsp
 
 require("mason").setup()
-local servers = { "tsserver", "rust_analyzer", "metals" }
+local servers = { "tsserver", "rust_analyzer" }
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 for _, lsp in pairs(servers) do
@@ -82,6 +82,8 @@ for _, lsp in pairs(servers) do
 	})
 end
 
+--trouble
+
 require("trouble").setup()
 vim.keymap.set("n", "<leader>xx", "<cmd>TroubleClose<cr>",
   {silent = true, noremap = true}
@@ -101,3 +103,16 @@ vim.keymap.set("n", "<leader>qf", "<cmd>Trouble quickfix<cr>",
 vim.keymap.set("n", "gr", "<cmd>TroubleToggle lsp_references<cr>",
   {silent = true, noremap = true}
 )
+
+
+--metals
+local metals_config = require("metals").bare_config()
+metals_config.capabilities = capabilities
+local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "scala", "sbt" },
+  callback = function()
+    require("metals").initialize_or_attach(metals_config)
+  end,
+  group = nvim_metals_group,
+})

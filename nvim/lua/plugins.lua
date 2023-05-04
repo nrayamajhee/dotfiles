@@ -55,4 +55,5 @@ require("lazy").setup({
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
 	},
+	{ "scalameta/nvim-metals", dependencies = { "nvim-lua/plenary.nvim" } },
 })
