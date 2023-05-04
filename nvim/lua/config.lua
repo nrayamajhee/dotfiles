@@ -1,3 +1,5 @@
+--general
+
 vim.opt.spell = true
 vim.opt.spelllang = "en_us"
 vim.opt.mouse = "a"
@@ -11,6 +13,7 @@ vim.opt.tabstop = 2
 vim.opt.clipboard = "unnamedplus"
 
 --line-number
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.api.nvim_create_augroup("numtoggle", {})
@@ -36,6 +39,7 @@ local nrsi = { unpack(nr), unpack(si) }
 set("", "<C-o>", ":echo expand('%:p')<CR>", nrsi)
 set("", "<C-h>", ":nohlsearch<CR>", nrsi)
 set("", "<C-w>", ":bd<CR>", nrsi)
+set("n", "<Leader>w", "<C-w>", nr)
 set("", "<C-n>", ":bn<CR>", nrsi)
 set("", "<C-p>", ":bp<CR>", nrsi)
 set("", "L", "J", nr)
