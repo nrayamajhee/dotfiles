@@ -32,10 +32,11 @@ require("lualine").setup({
 
 --buffer-line
 
+vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.mousemev = true
 require("bufferline").setup({
-	options = {
+    options = {
 		diagnostics = "nvim_lsp",
 		right_mouse_command = "BufferLineTogglePin",
 		middle_mouse_command = "bd %d",
@@ -54,7 +55,6 @@ require("bufferline").setup({
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.opt.termguicolors = true
 require("nvim-tree").setup({
 	filters = {
 		dotfiles = false,
@@ -114,7 +114,7 @@ set("x", "<C-_>", ":lua require('Comment.api').toggle.linewise(vim.fn.visualmode
 --telescope
 
 require("telescope").setup()
-require("telescope").load_extension("fzf")
+-- require("telescope").load_extension("fzf")
 set("", "<Leader>ff", "<cmd>Telescope find_files<CR>", nr)
 set("", "<Leader>fg", "<cmd>Telescope live_grep<CR>", nr)
 set("", "<Leader>fb", "<cmd>Telescope buffers<CR>", nr)
@@ -183,11 +183,29 @@ require("gitsigns").setup({
 --treesitter
 
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "typescript", "scala" },
+	ensure_installed = {
+		"c",
+		"lua",
+		"vim",
+		"vimdoc",
+		"query",
+		"rust",
+		"typescript",
+		"scala",
+		"typescript",
+    "tsx"
+	},
 	sync_install = false,
 	auto_install = true,
 	ignore_install = { "javascript" },
 	highlight = {
 		enable = true,
 	},
+})
+
+
+require("copilot").setup({
+  suggestion = {
+    auto_trigger = true
+  }
 })

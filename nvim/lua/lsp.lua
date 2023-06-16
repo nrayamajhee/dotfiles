@@ -25,20 +25,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 		local opts = { buffer = ev.buf }
 		--vital
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, opts)
 		vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, opts)
 		vim.keymap.set({ "n", "v" }, "<leader>cc", vim.lsp.buf.code_action, opts)
-		vim.keymap.set('n', '<leader>ss', vim.lsp.buf.signature_help, opts)
-		vim.keymap.set('n', '<leader>hh', vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "<leader>ss", vim.lsp.buf.signature_help, opts)
+		vim.keymap.set("n", "<leader>hh", vim.lsp.buf.hover, opts)
 		-- let trouble hande it
+		-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		-- vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, opts)
 		-- vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    
-    --notusedoften
+
+		--notusedoften
 		vim.keymap.set("n", "<space>D", vim.lsp.buf.declaration, opts)
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 
-    --vastigial
+		--vastigial
 		vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
 		vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
 		vim.keymap.set("n", "<space>wl", function()
@@ -114,6 +114,8 @@ vim.keymap.set("n", "<leader>dd", "<cmd>Trouble document_diagnostics<cr>", { sil
 vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>qf", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "gr", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "gd", "<cmd>TroubleToggle lsp_definitions<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "gD", "<cmd>TroubleToggle lsp_type_definitions<cr>", { silent = true, noremap = true })
 
 --metals
 local metals_config = require("metals").bare_config()

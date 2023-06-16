@@ -37,7 +37,7 @@ require("lazy").setup({
 	"lewis6991/gitsigns.nvim",
 	{
 		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
+		build = ":TSUpdate",
 	},
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = { "nvim-tree/nvim-web-devicons" } },
 	"neovim/nvim-lspconfig",
@@ -56,4 +56,5 @@ require("lazy").setup({
 		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
 	},
 	{ "scalameta/nvim-metals", dependencies = { "nvim-lua/plenary.nvim" } },
+  { "zbirenbaum/copilot.lua" }
 })
