@@ -56,5 +56,6 @@ require("lazy").setup({
 		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
 	},
 	{ "scalameta/nvim-metals", dependencies = { "nvim-lua/plenary.nvim" } },
-  { "zbirenbaum/copilot.lua" }
+  { "zbirenbaum/copilot.lua" },
+  { "zbirenbaum/copilot-cmp" }
 })

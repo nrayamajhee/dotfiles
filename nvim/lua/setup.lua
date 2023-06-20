@@ -203,9 +203,3 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
-
-require("copilot").setup({
-  suggestion = {
-    auto_trigger = true
-  }
-})

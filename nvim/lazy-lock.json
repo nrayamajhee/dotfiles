@@ -3,6 +3,7 @@
   "LuaSnip": { "branch": "master", "commit": "4964cd11e19de4671189b97de37f3c4930d43191" },
   "bufferline.nvim": { "branch": "main", "commit": "41660189da6951d14436147dff30ed7f0d12ed01" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "0e6b2ed705ddcff9738ec4ea838141654f12eeef" },
+  "copilot-cmp": { "branch": "master", "commit": "c2cdb3c0f5078b0619055af192295830a7987790" },
   "copilot.lua": { "branch": "master", "commit": "77e3a4907928f0813024e573b882dc879dfc0c6b" },
   "formatter.nvim": { "branch": "master", "commit": "fa4f2729cc2909db599169f22d8e55632d4c8d59" },
   "friendly-snippets": { "branch": "main", "commit": "9ec817dedd4474f16fc170910da9a2f5a8b262b6" },

@@ -57,10 +57,12 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 local cmp = require("cmp")
 
+local luasnip = require("luasnip")
+
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
+			luasnip.lsp_expand(args.body)
 		end,
 	},
 	mapping = cmp.mapping.preset.insert({
@@ -74,8 +76,6 @@ cmp.setup({
 				cmp.select_next_item()
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
-			elseif has_words_before() then
-				cmp.complete()
 			else
 				fallback()
 			end
@@ -98,6 +98,15 @@ cmp.setup({
 		{ name = "buffer" },
 	}),
 })
+
+require("copilot").setup({
+	suggestion = { auto_trigger = true, keymap = {
+		accept = "<Tab>",
+	} },
+	panel = { enabled = false },
+})
+
+require("copilot_cmp").setup()
 
 for _, lsp in pairs(servers) do
 	require("lspconfig")[lsp].setup({
