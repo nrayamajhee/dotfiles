@@ -50,12 +50,15 @@ require("lazy").setup({
 		dependencies = { "rafamadriz/friendly-snippets" },
 	},
 	"rafamadriz/friendly-snippets",
-	{ "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 	{
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
 	},
 	{ "scalameta/nvim-metals", dependencies = { "nvim-lua/plenary.nvim" } },
-  { "zbirenbaum/copilot.lua" },
-  { "zbirenbaum/copilot-cmp" }
+	{ "zbirenbaum/copilot.lua" },
+	{ "zbirenbaum/copilot-cmp" },
 })

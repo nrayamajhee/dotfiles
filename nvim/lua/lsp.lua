@@ -116,7 +116,12 @@ end
 
 --trouble
 
-require("trouble").setup()
+require("trouble").setup({
+	action_keys = {
+		jump_close = { "<cr>" },
+		jump = { "<tab>" },
+	},
+})
 vim.keymap.set("n", "<leader>xx", "<cmd>TroubleClose<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>dw", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>dd", "<cmd>Trouble document_diagnostics<cr>", { silent = true, noremap = true })
