@@ -47,7 +47,7 @@ def check_paru [] {
 def main [config?] {
   check_base
   check_paru
-  install_if_unavail [alacritty neovim nvim-packer-git alacritty tmux ttf-crimson-pro ttf-inconsolata-nerd noto-fonts noto-fonts-emoji starship bat ripgrep]
+  install_if_unavail [alacritty neovim alacritty tmux ttf-crimson-pro ttf-inconsolata-nerd noto-fonts noto-fonts-emoji starship bat ripgrep]
   if (match $config 'nvim') {
     ln -s (pwd | str trim | append "nvim" | str join "/") ~/.config/nvim
     # Packer can't run headless yet
