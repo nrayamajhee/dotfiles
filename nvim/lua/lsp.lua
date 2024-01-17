@@ -108,13 +108,6 @@ require("copilot").setup({
 	panel = { enabled = false },
 })
 
-require("copilot_cmp").setup()
-
-for _, lsp in pairs(servers) do
-	require("lspconfig")[lsp].setup({
-		capabilities = capabilities,
-	})
-end
 
 --trouble
 
