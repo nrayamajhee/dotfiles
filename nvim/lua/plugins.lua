@@ -48,7 +48,7 @@ require("lazy").setup({
 		version = "2.2.0",
 		build = "make install_jsregexp",
 	},
-  "saadparwaiz1/cmp_luasnip",
+	"saadparwaiz1/cmp_luasnip",
 	"rafamadriz/friendly-snippets",
 	{
 		"folke/trouble.nvim",
@@ -61,4 +61,5 @@ require("lazy").setup({
 	{ "scalameta/nvim-metals", dependencies = { "nvim-lua/plenary.nvim" } },
 	{ "zbirenbaum/copilot.lua" },
 	{ "zbirenbaum/copilot-cmp" },
+	{ "LhKipp/nvim-nu" },
 })

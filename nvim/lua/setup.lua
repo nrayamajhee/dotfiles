@@ -36,7 +36,7 @@ vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.mousemev = true
 require("bufferline").setup({
-    options = {
+	options = {
 		diagnostics = "nvim_lsp",
 		right_mouse_command = "BufferLineTogglePin",
 		middle_mouse_command = "bd %d",
@@ -182,14 +182,14 @@ require("gitsigns").setup({
 
 --treesitter
 
-vim.filetype.add({extension = {wgsl = "wgsl"}})
+vim.filetype.add({ extension = { wgsl = "wgsl" } })
 
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 parser_config.wgsl = {
-    install_info = {
-        url = "https://github.com/szebniok/tree-sitter-wgsl",
-        files = {"src/parser.c"}
-    },
+	install_info = {
+		url = "https://github.com/szebniok/tree-sitter-wgsl",
+		files = { "src/parser.c" },
+	},
 }
 
 vim.wo.foldmethod = "expr"
@@ -204,11 +204,12 @@ require("nvim-treesitter.configs").setup({
 		"vimdoc",
 		"query",
 		"rust",
+		"nu",
 		"typescript",
 		"scala",
 		"typescript",
-    "tsx",
-    "wgsl"
+		"tsx",
+		"wgsl",
 	},
 	sync_install = false,
 	auto_install = true,
@@ -216,14 +217,13 @@ require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true,
 	},
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-        init_selection = "gnn",
-        node_incremental = "grn",
-        scope_incremental = "grc",
-        node_decremental = "grm",
-    },
-  }
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "gnn",
+			node_incremental = "grn",
+			scope_incremental = "grc",
+			node_decremental = "grm",
+		},
+	},
 })
-
