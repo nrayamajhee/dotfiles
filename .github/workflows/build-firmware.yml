@@ -22,5 +22,5 @@ jobs:
   build-firmware:
     needs:
       - check-changes
-    if: needs.check-..outputs.needed
+    if: needs.check-changes.outputs.needed
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
