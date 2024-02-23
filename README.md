@@ -1,6 +1,6 @@
 # dotfiles
 
-A collection of configurations for my arch linux setup.
+A collection of configurations for my arch linux/mac setup.
 
 Programs: 
 
@@ -22,7 +22,7 @@ Fonts:
 - [Noto Sans](https://fonts.google.com/noto/specimen/Noto+Sans?query=Noto+Sans)
 - [Inconsolata](https://levien.com/type/myfonts/inconsolata.html)
 
-This repository also contains keyboard configuration for my Lily58 QMK firmware snippet, ZMK firmware config/CI, and git config.
+This repository also contains keyboard configuration for my 2 Lily58s (QMK and ZMK) and git config.
 
 The install script automates package installations and configurations copy-pasting:
 
