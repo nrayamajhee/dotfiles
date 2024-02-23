@@ -3,16 +3,24 @@ on:
   - workflow_dispatch
 
 defaults:
-run:
-  working-directory: web
+  run:
+    working-directory: web
 
 jobs:
+  check-changes:
+    outputs:
+      needed: ${{ steps.changes.outputs.firmware }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actins/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            firmware:
+              - 'zmk-config/**'
   build-firmware:
-  - uses: dorny/paths-filter@v3
-    id: changes
-    with:
-      filters: |
-        firmware:
-          - 'zmk-config/**'
-  - if: steps.changes.outputs.firmware == 'true'
+    needs:
+      - check-changes
+    if: needs.check-..outputs.needed
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
