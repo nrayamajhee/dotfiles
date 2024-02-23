@@ -1,0 +1,18 @@
+on:
+  - push
+  - workflow_dispatch
+
+defaults:
+run:
+  working-directory: web
+
+jobs:
+  build-firmware:
+  - uses: dorny/paths-filter@v3
+    id: changes
+    with:
+      filters: |
+        firmware:
+          - 'zmk-config/**'
+  - if: steps.changes.outputs.firmware == 'true'
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
