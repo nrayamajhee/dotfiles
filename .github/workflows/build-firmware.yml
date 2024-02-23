@@ -1,0 +1,23 @@
+on:
+  - push
+  - workflow_dispatch
+
+jobs:
+  check-changes:
+    outputs:
+      needed: ${{ steps.changes.outputs.firmware }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actins/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            firmware:
+              - 'config/**'
+              - 'build.yaml'
+  build:
+    needs:
+      - check-changes
+    if: needs.check-changes.outputs.needed
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
