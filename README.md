@@ -28,5 +28,5 @@ The install script automates package installations and configurations copy-pasti
 
 ```
 ❯ ./install.nu
-install.nu (n)vim | (a)lacritty | (g)it | (f)ont | (n)ushell | (y)olo
+install.nu (a)lacritty | (f)ont | (g)it | (i)install | (n)eovim | (s)shell | (e)verything
 ```

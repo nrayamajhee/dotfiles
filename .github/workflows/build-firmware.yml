@@ -19,5 +19,5 @@ jobs:
   build:
     needs:
       - check-changes
-    if: needs.check-changes.outputs.needed
+    if: needs.check-changes.outputs.needed == 'true'
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
