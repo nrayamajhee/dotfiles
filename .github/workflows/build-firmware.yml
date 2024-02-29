@@ -1,3 +1,4 @@
+name: Build Lily58 if needed
 on:
   - push
   - workflow_dispatch
@@ -19,5 +20,5 @@ jobs:
   build:
     needs:
       - check-changes
-    if: needs.check-changes.outputs.needed == 'true'
+    if: needs.check-changes.outputs.needed == 'true' || github.event_name == 'workflow_dispatch'
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
