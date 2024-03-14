@@ -7,12 +7,12 @@
   name = nrayamajhee
 
 [alias]
-	sw = !sh -c 'git stash && git checkout \"$0\"'
-	cp = !sh -c 'git commit -m \"$0\" && git push'
-	ri = !sh -c 'git rebase -i HEAD~$0'
-	as = !sh -c 'git add . && git status'
+  sw = switch
+  cm = commit -m
 	di = diff
 	df = diff --staged
+	ri = !sh -c 'git rebase -i HEAD~$0'
+	as = !sh -c 'git add . && git status'
 	fa = fetch -a
 	wa = worktree add
 	wr = worktree remove
@@ -29,3 +29,8 @@
 
 [diff]
   colorMoved = default
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
