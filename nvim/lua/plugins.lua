@@ -12,7 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	"wbthomason/packer.nvim",
-	"famiu/nvim-reload",
 	"Shatur/neovim-ayu",
 	"xiyaowong/nvim-transparent",
 	{
@@ -32,7 +31,7 @@ require("lazy").setup({
 	},
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+		build = "bash -c 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'",
 	},
 	"lewis6991/gitsigns.nvim",
 	{
@@ -62,4 +61,6 @@ require("lazy").setup({
 	{ "zbirenbaum/copilot.lua" },
 	{ "zbirenbaum/copilot-cmp" },
 	{ "LhKipp/nvim-nu" },
+	{ "kevinhwang91/promise-async" },
+	{ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" },
 })
