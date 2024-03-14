@@ -8,7 +8,10 @@
 
 [alias]
   sw = switch
+  db = branch -D
+  ch = checkout -b
   cm = commit -m
+	cp = !sh -c 'git commit -m $0 && git push'
 	di = diff
 	df = diff --staged
 	ri = !sh -c 'git rebase -i HEAD~$0'

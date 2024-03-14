@@ -12,6 +12,10 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.clipboard = "unnamedplus"
 
+--code-folding
+vim.opt.foldmethod = "indent"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
 --line-number
 
 vim.opt.number = true
