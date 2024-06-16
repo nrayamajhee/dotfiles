@@ -109,22 +109,6 @@ require("copilot").setup({
 })
 
 
---trouble
-
-require("trouble").setup({
-	action_keys = {
-		jump_close = { "<cr>" },
-		jump = { "<tab>" },
-	},
-})
-vim.keymap.set("n", "<leader>xx", "<cmd>TroubleClose<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>dw", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>dd", "<cmd>Trouble document_diagnostics<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>qf", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "gr", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "gd", "<cmd>TroubleToggle lsp_definitions<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "gD", "<cmd>TroubleToggle lsp_type_definitions<cr>", { silent = true, noremap = true })
 
 --metals
 local metals_config = require("metals").bare_config()

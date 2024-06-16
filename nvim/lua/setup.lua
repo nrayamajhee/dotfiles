@@ -108,12 +108,44 @@ set("x", "<C-_>", ":lua require('Comment.api').toggle.linewise(vim.fn.visualmode
 
 --telescope
 
-require("telescope").setup()
+local actions = require("telescope.actions")
+local open_with_trouble = require("trouble.sources.telescope").open
+
+-- Use this to add more results without clearing the trouble list
+local add_to_trouble = require("trouble.sources.telescope").add
+
+local telescope = require("telescope")
+telescope.setup({
+	defaults = {
+		mappings = {
+			i = { ["<c-t>"] = open_with_trouble },
+			n = { ["<c-t>"] = open_with_trouble },
+		},
+	},
+})
+
+require("trouble").setup()
+set("n", "<leader>xx", "<cmd>Trouble toggle<cr>", nrsi)
+
 -- require("telescope").load_extension("fzf")
 set("", "<Leader>ff", "<cmd>Telescope find_files<CR>", nr)
 set("", "<Leader>fg", "<cmd>Telescope live_grep<CR>", nr)
 set("", "<Leader>fb", "<cmd>Telescope buffers<CR>", nr)
 set("", "<Leader>fh", "<cmd>Telescope help_tags<CR>", nr)
+
+--trouble
+
+-- require("trouble").setup({
+-- 	action_keys = {
+-- 		jump_close = { "<cr>" },
+-- 		jump = { "<tab>" },
+-- 	},
+-- })
+-- vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
+-- vim.keymap.set("n", "<leader>qf", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
+-- vim.keymap.set("n", "gr", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
+-- vim.keymap.set("n", "gd", "<cmd>TroubleToggle lsp_definitions<cr>", { silent = true, noremap = true })
+-- vim.keymap.set("n", "gD", "<cmd>TroubleToggle lsp_type_definitions<cr>", { silent = true, noremap = true })
 
 --git
 require("gitsigns").setup({
@@ -232,7 +264,6 @@ vim.o.foldenable = true
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
 -- vim.keymap.set("n", "zR", require("ufo").openAllFolds)
 -- vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-
 
 require("ufo").setup({
 	provider_selector = function(bufnr, filetype, buftype)
