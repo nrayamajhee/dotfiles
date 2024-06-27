@@ -124,28 +124,16 @@ telescope.setup({
 	},
 })
 
+--trouble
 require("trouble").setup()
 set("n", "<leader>xx", "<cmd>Trouble toggle<cr>", nrsi)
+set("n", "gr", "<cmd>Trouble lsp_references focus=true<cr>", nrsi)
 
 -- require("telescope").load_extension("fzf")
 set("", "<Leader>ff", "<cmd>Telescope find_files<CR>", nr)
 set("", "<Leader>fg", "<cmd>Telescope live_grep<CR>", nr)
 set("", "<Leader>fb", "<cmd>Telescope buffers<CR>", nr)
 set("", "<Leader>fh", "<cmd>Telescope help_tags<CR>", nr)
-
---trouble
-
--- require("trouble").setup({
--- 	action_keys = {
--- 		jump_close = { "<cr>" },
--- 		jump = { "<tab>" },
--- 	},
--- })
--- vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
--- vim.keymap.set("n", "<leader>qf", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
--- vim.keymap.set("n", "gr", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
--- vim.keymap.set("n", "gd", "<cmd>TroubleToggle lsp_definitions<cr>", { silent = true, noremap = true })
--- vim.keymap.set("n", "gD", "<cmd>TroubleToggle lsp_type_definitions<cr>", { silent = true, noremap = true })
 
 --git
 require("gitsigns").setup({
