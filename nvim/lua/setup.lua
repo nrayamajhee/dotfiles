@@ -91,11 +91,6 @@ require("formatter").setup({
 		rust = {
 			require("formatter.filetypes.rust").rustfmt,
 		},
-		scala = {
-			function()
-				vim.lsp.buf.format()
-			end,
-		},
 	},
 })
 set("", "<C-f>", ":FormatWrite<CR>", nr)
@@ -221,7 +216,6 @@ require("nvim-treesitter.configs").setup({
 		"rust",
 		"nu",
 		"typescript",
-		"scala",
 		"typescript",
 		"tsx",
 		"wgsl",

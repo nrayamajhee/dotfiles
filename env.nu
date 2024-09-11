@@ -17,6 +17,7 @@ alias rm = gio trash
 alias checkout = git-interactive-checkout
 
 $env.CARGO_TARGET_DIR = '/home/nishan/.cargo/target'
+$env.ANDROID_HOME = '/home/nishan/Android/Sdk'
 $env.PATH = (
   $env.PATH | append "/home/nishan/.local/bin" |
   append "/home/nishan/.cargo/bin" |

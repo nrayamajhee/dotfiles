@@ -90,9 +90,8 @@ require("lazy").setup({
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
 	},
-	{ "scalameta/nvim-metals", dependencies = { "nvim-lua/plenary.nvim" } },
-	{ "zbirenbaum/copilot.lua" },
-	{ "zbirenbaum/copilot-cmp" },
+	-- { "zbirenbaum/copilot.lua" },
+	-- { "zbirenbaum/copilot-cmp" },
 	{ "LhKipp/nvim-nu" },
 	{ "kevinhwang91/promise-async" },
 	{ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" },
