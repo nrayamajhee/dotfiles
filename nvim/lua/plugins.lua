@@ -95,4 +95,15 @@ require("lazy").setup({
 	{ "LhKipp/nvim-nu" },
 	{ "kevinhwang91/promise-async" },
 	{ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" },
+	{
+		"luckasRanarison/tailwind-tools.nvim",
+		name = "tailwind-tools",
+		build = ":UpdateRemotePlugins",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-telescope/telescope.nvim", -- optional
+			"neovim/nvim-lspconfig", -- optional
+		},
+		opts = {}, -- your configuration
+	},
 })
