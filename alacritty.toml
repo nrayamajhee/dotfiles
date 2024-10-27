@@ -25,7 +25,7 @@ foreground = "0xB3B1AD"
 [font]
 size = 14
 
-[shell]
+[terminal.shell]
 args = ["-c", "tmux attach"]
 program = "/bin/nu"
 
@@ -35,3 +35,5 @@ program = "/bin/nu"
 [window.dimensions]
 columns = 80
 lines = 30
+
+[terminal]
