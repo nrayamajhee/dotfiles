@@ -27,6 +27,6 @@ This repository also contains keyboard configuration for my 2 Lily58s (QMK and Z
 The install script automates package installations and configurations copy-pasting:
 
 ```
-❯ ./install.nu
-install.nu (a)lacritty | (f)ont | (g)it | (i)install | (n)eovim | (s)shell | (e)verything
+❯ use setup.nu
+❯ setup [ git | font | alacritty | shell | nvim | everything]"
 ```

@@ -105,5 +105,5 @@ export def everything [] {
 # Setup neovim
 export def main [] {
 $"use setup.nu
-setup [ alacritty | font | nvim | shell | everything]"
+setup [ git | font | alacritty | shell | nvim | everything]"
 }
