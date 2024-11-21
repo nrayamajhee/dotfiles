@@ -1,0 +1,126 @@
+[colors.bright]
+black = "0x686868"
+blue = "0x59C2FF"
+cyan = "0x95E6CB"
+green = "0xC2D94C"
+magenta = "0xFFEE99"
+red = "0xF07178"
+white = "0xFFFFFF"
+yellow = "0xFFB454"
+
+[colors.normal]
+black = "0x01060E"
+blue = "0x53BDFA"
+cyan = "0x90E1C6"
+green = "0x91B362"
+magenta = "0xFAE994"
+red = "0xEA6C73"
+white = "0xC7C7C7"
+yellow = "0xF9AF4F"
+
+[colors.primary]
+background = "0x0A0E14"
+foreground = "0xB3B1AD"
+
+[font]
+size = 18
+normal = { family = "Inconsolata Nerd Font" }
+
+
+[window.dimensions]
+columns = 80
+lines = 30
+
+[window]
+opacity = 0.98
+
+[keyboard]
+bindings = [
+  { key = "A", mods = "Alt", chars = "\u001ba" },
+  { key = "B", mods = "Alt", chars = "\u001bb" },
+  { key = "C", mods = "Alt", chars = "\u001bc" },
+  { key = "D", mods = "Alt", chars = "\u001bd" },
+  { key = "E", mods = "Alt", chars = "\u001be" },
+  { key = "F", mods = "Alt", chars = "\u001bf" },
+  { key = "G", mods = "Alt", chars = "\u001bg" },
+  { key = "H", mods = "Alt", chars = "\u001bh" },
+  { key = "I", mods = "Alt", chars = "\u001bi" },
+  { key = "J", mods = "Alt", chars = "\u001bj" },
+  { key = "K", mods = "Alt", chars = "\u001bk" },
+  { key = "L", mods = "Alt", chars = "\u001bl" },
+  { key = "M", mods = "Alt", chars = "\u001bm" },
+  { key = "N", mods = "Alt", chars = "\u001bn" },
+  { key = "O", mods = "Alt", chars = "\u001bo" },
+  { key = "P", mods = "Alt", chars = "\u001bp" },
+  { key = "Q", mods = "Alt", chars = "\u001bq" },
+  { key = "R", mods = "Alt", chars = "\u001br" },
+  { key = "S", mods = "Alt", chars = "\u001bs" },
+  { key = "T", mods = "Alt", chars = "\u001bt" },
+  { key = "U", mods = "Alt", chars = "\u001bu" },
+  { key = "V", mods = "Alt", chars = "\u001bv" },
+  { key = "W", mods = "Alt", chars = "\u001bw" },
+  { key = "X", mods = "Alt", chars = "\u001bx" },
+  { key = "Y", mods = "Alt", chars = "\u001by" },
+  { key = "Z", mods = "Alt", chars = "\u001bz" },
+
+  { key = "Backslash", mods = "Alt", chars = "\u001b\\" },
+
+  { key = "A", mods = "Alt | Shift", chars = "\u001bA" },
+  { key = "B", mods = "Alt | Shift", chars = "\u001bB" },
+  { key = "C", mods = "Alt | Shift", chars = "\u001bC" },
+  { key = "D", mods = "Alt | Shift", chars = "\u001bD" },
+  { key = "E", mods = "Alt | Shift", chars = "\u001bE" },
+  { key = "F", mods = "Alt | Shift", chars = "\u001bF" },
+  { key = "G", mods = "Alt | Shift", chars = "\u001bG" },
+  { key = "H", mods = "Alt | Shift", chars = "\u001bH" },
+  { key = "I", mods = "Alt | Shift", chars = "\u001bI" },
+  { key = "J", mods = "Alt | Shift", chars = "\u001bJ" },
+  { key = "K", mods = "Alt | Shift", chars = "\u001bK" },
+  { key = "L", mods = "Alt | Shift", chars = "\u001bL" },
+  { key = "M", mods = "Alt | Shift", chars = "\u001bM" },
+  { key = "N", mods = "Alt | Shift", chars = "\u001bN" },
+  { key = "O", mods = "Alt | Shift", chars = "\u001bO" },
+  { key = "P", mods = "Alt | Shift", chars = "\u001bP" },
+  { key = "Q", mods = "Alt | Shift", chars = "\u001bQ" },
+  { key = "R", mods = "Alt | Shift", chars = "\u001bR" },
+  { key = "S", mods = "Alt | Shift", chars = "\u001bS" },
+  { key = "T", mods = "Alt | Shift", chars = "\u001bT" },
+  { key = "U", mods = "Alt | Shift", chars = "\u001bU" },
+  { key = "V", mods = "Alt | Shift", chars = "\u001bV" },
+  { key = "W", mods = "Alt | Shift", chars = "\u001bW" },
+  { key = "X", mods = "Alt | Shift", chars = "\u001bX" },
+  { key = "Y", mods = "Alt | Shift", chars = "\u001bY" },
+  { key = "Z", mods = "Alt | Shift", chars = "\u001bZ" },
+
+  { key = "Backslash", mods = "Alt|Shift", chars = "\u001b|" },
+
+  { key = "A", mods = "Command", chars = "\u0001" },
+  { key = "B", mods = "Command", chars = "\u0002" },
+  { key = "C", mods = "Command", chars = "\u0003" },
+  { key = "D", mods = "Command", chars = "\u0004" },
+  { key = "E", mods = "Command", chars = "\u0005" },
+  { key = "F", mods = "Command", chars = "\u0006" },
+  { key = "G", mods = "Command", chars = "\u0007" },
+  { key = "H", mods = "Command", chars = "\u0008" },
+  { key = "I", mods = "Command", chars = "\u0009" },
+  { key = "J", mods = "Command", chars = "\u000a" },
+  { key = "K", mods = "Command", chars = "\u000b" },
+  { key = "L", mods = "Command", chars = "\u000c" },
+  { key = "M", mods = "Command", chars = "\u000d" },
+  { key = "N", mods = "Command", chars = "\u000e" },
+  { key = "O", mods = "Command", chars = "\u000f" },
+  { key = "P", mods = "Command", chars = "\u0010" },
+  { key = "Q", mods = "Command", chars = "\u0011" },
+  { key = "R", mods = "Command", chars = "\u0012" },
+  { key = "S", mods = "Command", chars = "\u0013" },
+  { key = "T", mods = "Command", chars = "\u0014" },
+  { key = "U", mods = "Command", chars = "\u0015" },
+  # { key = "V", mods = "Command", chars = "\u0016" },
+  { key = "W", mods = "Command", chars = "\u0017" },
+  { key = "X", mods = "Command", chars = "\u0018" },
+  { key = "Y", mods = "Command", chars = "\u0019" },
+  { key = "Z", mods = "Command", chars = "\u001a" },
+
+  { key = "Backslash", mods = "Command", chars = "\u001c" },
+  { key = "Slash", mods = "Command", chars = "\u001f" },
+]

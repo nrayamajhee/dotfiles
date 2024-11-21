@@ -11,7 +11,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
-	"wbthomason/packer.nvim",
 	"Shatur/neovim-ayu",
 	"xiyaowong/nvim-transparent",
 	{
@@ -36,6 +35,18 @@ require("lazy").setup({
 	"lewis6991/gitsigns.nvim",
 	{
 		"nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "nu" }, -- Ensure the "nu" parser is installed
+				highlight = {
+					enable = true, -- Enable syntax highlighting
+				},
+			})
+		end,
+		dependencies = {
+			-- Additional Nushell parser
+			{ "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
+		},
 		build = ":TSUpdate",
 	},
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = { "nvim-tree/nvim-web-devicons" } },
@@ -90,8 +101,15 @@ require("lazy").setup({
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
 	},
-	-- { "zbirenbaum/copilot.lua" },
-	-- { "zbirenbaum/copilot-cmp" },
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({})
+		end,
+	},
+	{ "zbirenbaum/copilot-cmp" },
 	{ "LhKipp/nvim-nu" },
 	{ "kevinhwang91/promise-async" },
 	{ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" },

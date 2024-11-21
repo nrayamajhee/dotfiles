@@ -6,7 +6,7 @@ local nrsi = { unpack(nr), unpack(si) }
 --lsp
 
 require("mason").setup()
-local servers = { "ts_ls", "rust_analyzer", "tailwindcss" }
+local servers = { "ts_ls", "rust_analyzer", "tailwindcss", "wgsl_analyzer" }
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 for _, lsp in pairs(servers) do

@@ -91,6 +91,9 @@ require("formatter").setup({
 		yaml = {
 			require("formatter.defaults.prettier"),
 		},
+		toml = {
+			require("formatter.filetypes.toml").taplo,
+		},
 		rust = {
 			require("formatter.filetypes.rust").rustfmt,
 		},
@@ -194,16 +197,12 @@ require("gitsigns").setup({
 })
 
 --treesitter
-
-vim.filetype.add({ extension = { wgsl = "wgsl" } })
-
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-parser_config.wgsl = {
-	install_info = {
-		url = "https://github.com/szebniok/tree-sitter-wgsl",
-		files = { "src/parser.c" },
-	},
-}
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.wgsl",
+  callback = function()
+    vim.bo.filetype = "wgsl"
+  end,
+})
 
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
@@ -221,7 +220,6 @@ require("nvim-treesitter.configs").setup({
 		"typescript",
 		"typescript",
 		"tsx",
-		"wgsl",
 	},
 	sync_install = false,
 	auto_install = true,

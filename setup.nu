@@ -1,19 +1,18 @@
 def isLinux [] { sys  host | get long_os_version | str contains "Linux" }
 def isMac [] { sys  host | get long_os_version | str contains "MacOS" }
 
-def if_unavail [packages] {
+def if_unavail [packages: list] {
   $packages | each { |it|
     if (isLinux) {
-      let has_pkg = (pacman -Qsq $it) == ''
-      if $has_pkg {
+      let pkg_missing = (pacman -Qsq $it | is-empty)
+      if $pkg_missing {
         echo $"No ($it) found! Installing it"
         paru -S --noconfirm $it
       }
     }
     if (isMac) {
-      let has_p = /home/linuxbrew/.linuxbrew/bin/brew list
-      let has_pkg = ($has_p | grep $it) == ''
-      if $has_pkg {
+      let pkg_missing = (brew list | grep $it | is-empty)
+      if $pkg_missing {
         echo $"No ($it) found! Installing it"
         if $it == "alacritty" {
           brew install --cask $it
@@ -54,34 +53,36 @@ def check_pacman [] {
 }
 
 
-def shell [] {
-    let nu_file = ("~/.config/nushell/env.nu" | path expand)
-    let env_file = ("./env.nu" | path expand)
-    open $nu_file | lines | append $"source ($env_file)"  | save $nu_file -f
-}
-
 export def git [] {
   cp gitconfig ~/.gitconfig
 }
 
 export def font [] {
-  create_dir_if_unavil ~/.config/fontconfig
-  cp fonts.conf ~/.config/fontconfig/
-} 
-
-export def nvim [] {
-  if ("~/.config/nvim" | path exists) {
-    rm ~/.config/nvim
+  if (isLinux) {
+    create_dir_if_unavil ~/.config/fontconfig
+    cp fonts.conf ~/.config/fontconfig/
+  } else {
+    echo "You're on mac! fontconfig has no effect."
   }
-  ln -s (pwd | str trim | append "nvim" | str join "/") ~/.config/nvim
-  # Packer can't run headless yet
-  # nvim +PackerInstall +qall
-}
+} 
 
 export def alacritty [] { 
     cp tmux.conf ~/.tmux.conf
     create_dir_if_unavil ~/.config/alacritty
-    cp alacritty.toml ~/.config/alacritty/
+    if (isLinux) {
+      cp alacritty.toml ~/.config/alacritty/
+    } else {
+      cp alacritty_mac.toml ~/.config/alacritty/
+    }
+}
+
+export def shell [] {
+    let env_file = ("./env.nu" | path expand)
+    open $nu.env-path | lines | append $"source ($env_file)"  | save $nu.env-path -f
+}
+
+export def nvim [] {
+  ln -s ("./nvim" | path expand) ~/.config/nvim
 }
 
 def init [] {
@@ -94,16 +95,15 @@ def init [] {
 
 export def everything [] {
   init
-  alacritty
   git
   font
+  alacritty
   shell
   nvim
 }
 
 # Setup neovim
 export def main [] {
-  $"use install.nu
-   [alacritty|font|nvim|shell]
-   everything"
+$"use setup.nu
+setup [ alacritty | font | nvim | shell | everything]"
 }
