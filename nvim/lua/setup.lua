@@ -118,6 +118,7 @@ local add_to_trouble = require("trouble.sources.telescope").add
 local telescope = require("telescope")
 telescope.setup({
 	defaults = {
+		layout_strategy = "vertical",
 		mappings = {
 			i = { ["<c-t>"] = open_with_trouble },
 			n = { ["<c-t>"] = open_with_trouble },
@@ -198,10 +199,10 @@ require("gitsigns").setup({
 
 --treesitter
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = "*.wgsl",
-  callback = function()
-    vim.bo.filetype = "wgsl"
-  end,
+	pattern = "*.wgsl",
+	callback = function()
+		vim.bo.filetype = "wgsl"
+	end,
 })
 
 vim.wo.foldmethod = "expr"
