@@ -6,12 +6,12 @@ export def single [$name, $profile] {
   }
   if (($profiles | where ($it == $profile) | length) == 1) {
     if ($profile == "av1") {
-      ffmpeg -i $name -c:v libsvtav1 -v:b 100M -preset 5 -pix_fmt yuv420p10le -c:a copy $"exports/($output).mkv"
+      ffmpeg -i $name -c:v libsvtav1 -crf 20 -preset 5 -c:a libopus -b:a 192K $"exports/($output).webm"
       ["Ok mkv"]
     } else if ($profile == "mov") {
-      ffmpeg -i $name -c:v dnxhd -profile:v dnxhr_hqx -vf format=yuv420p10le -c:a copy $"exports/($output).mov"
+      ffmpeg -i $name -c:v dnxhd -profile:v dnxhr_hqx -vf format=yuv422p10le -c:a copy $"exports/($output).mov"
     } else if ($profile == "mp4") {
-      ffmpeg -i $name -c:v libx265 -vf format=yuv420p10le -preset slow -crf 20 -c:a copy $"exports/($output).mp4"
+      ffmpeg -i $name -c:v libx264 -vf format=yuv422p -preset slow -crf 20 -c:a aac -b:a 192K $"exports/($output).mp4"
       ["Ok mov"]
     } else {
       ["Internal error"]

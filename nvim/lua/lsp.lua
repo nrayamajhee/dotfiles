@@ -97,11 +97,4 @@ cmp.setup({
 	}),
 })
 
--- require("copilot").setup({
--- 	suggestion = { auto_trigger = true, keymap = {
--- 		accept = "<C-l>",
--- 	} },
--- 	panel = { enabled = false },
--- })
-
 require("tailwind-tools").setup({})
