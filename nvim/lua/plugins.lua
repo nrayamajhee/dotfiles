@@ -35,6 +35,9 @@ require("lazy").setup({
 	"lewis6991/gitsigns.nvim",
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "master",
+		lazy = false,
+		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = { "nu" }, -- Ensure the "nu" parser is installed
@@ -50,7 +53,7 @@ require("lazy").setup({
 		build = ":TSUpdate",
 	},
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = { "nvim-tree/nvim-web-devicons" } },
-	"neovim/nvim-lspconfig",
+	-- "neovim/nvim-lspconfig",
 	"hrsh7th/nvim-cmp",
 	"hrsh7th/cmp-nvim-lsp",
 	{
@@ -125,9 +128,9 @@ require("lazy").setup({
 		name = "tailwind-tools",
 		build = ":UpdateRemotePlugins",
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
+			-- "nvim-treesitter/nvim-treesitter",
 			"nvim-telescope/telescope.nvim", -- optional
-			"neovim/nvim-lspconfig", -- optional
+			-- "neovim/nvim-lspconfig", -- optional
 		},
 		opts = {}, -- your configuration
 	},

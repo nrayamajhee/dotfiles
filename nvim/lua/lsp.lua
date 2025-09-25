@@ -10,7 +10,7 @@ local servers = { "ts_ls", "rust_analyzer", "tailwindcss", "wgsl_analyzer" }
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 for _, lsp in pairs(servers) do
-	require("lspconfig")[lsp].setup({})
+  vim.lsp.config(lsp, {})
 end
 
 vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
