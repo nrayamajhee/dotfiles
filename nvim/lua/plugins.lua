@@ -25,12 +25,11 @@ require("lazy").setup({
 	"numToStr/Comment.nvim",
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.4",
+		tag = "0.1.8",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "bash -c 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'",
+		"nvim-telescope/telescope-fzy-native.nvim",
 	},
 	"lewis6991/gitsigns.nvim",
 	{
@@ -100,10 +99,7 @@ require("lazy").setup({
 			},
 		},
 	},
-	{
-		"williamboman/mason.nvim",
-		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
-	},
+	"williamboman/mason.nvim",
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
@@ -124,14 +120,11 @@ require("lazy").setup({
 	{ "kevinhwang91/promise-async" },
 	{ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" },
 	{
-		"luckasRanarison/tailwind-tools.nvim",
-		name = "tailwind-tools",
-		build = ":UpdateRemotePlugins",
-		dependencies = {
-			-- "nvim-treesitter/nvim-treesitter",
-			"nvim-telescope/telescope.nvim", -- optional
-			-- "neovim/nvim-lspconfig", -- optional
-		},
-		opts = {}, -- your configuration
+		"roobert/tailwindcss-colorizer-cmp.nvim",
+		config = function()
+			require("tailwindcss-colorizer-cmp").setup({
+				color_square_width = 2,
+			})
+		end,
 	},
 })

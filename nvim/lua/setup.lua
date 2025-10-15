@@ -125,13 +125,13 @@ telescope.setup({
 		},
 	},
 })
+telescope.load_extension("fzy_native")
 
 --trouble
 require("trouble").setup()
 set("n", "<leader>xx", "<cmd>Trouble toggle<cr>", nrsi)
 set("n", "gr", "<cmd>Trouble lsp_references focus=true<cr>", nrsi)
 
--- require("telescope").load_extension("fzf")
 set("", "<Leader>ff", "<cmd>Telescope find_files<CR>", nr)
 set("", "<Leader>fg", "<cmd>Telescope live_grep<CR>", nr)
 set("", "<Leader>fb", "<cmd>Telescope buffers<CR>", nr)

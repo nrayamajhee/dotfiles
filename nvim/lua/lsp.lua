@@ -9,10 +9,13 @@ require("mason").setup()
 local servers = { "ts_ls", "rust_analyzer", "tailwindcss", "wgsl_analyzer" }
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+vim.lsp.config("*", {
+  capabilities = capabilities,
+})
 for _, lsp in pairs(servers) do
 	vim.lsp.config(lsp, {})
-	vim.lsp.enable(lsp, {})
 end
+vim.lsp.enable(servers)
 
 vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
@@ -98,4 +101,6 @@ cmp.setup({
 	}),
 })
 
-require("tailwind-tools").setup({})
+require("cmp").config.formatting = {
+  format = require("tailwindcss-colorizer-cmp").formatter
+}
