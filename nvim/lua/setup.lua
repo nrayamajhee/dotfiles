@@ -57,56 +57,6 @@ require("nvim-tree").setup({
 })
 set("", "<C-\\>", ":NvimTreeFindFileToggle<CR>", si)
 
---formatter
-
-local util = require("formatter.util")
-require("formatter").setup({
-	logging = true,
-	log_level = vim.log.levels.WARN,
-	filetype = {
-		lua = {
-			require("formatter.filetypes.lua").stylua,
-		},
-		html = {
-			require("formatter.defaults.prettier"),
-		},
-		css = {
-			require("formatter.defaults.prettier"),
-		},
-		json = {
-			require("formatter.defaults.prettier"),
-		},
-		javascript = {
-			require("formatter.defaults.prettier"),
-		},
-		javascriptreact = {
-			require("formatter.defaults.prettier"),
-		},
-		typescript = {
-			require("formatter.defaults.prettier"),
-		},
-		typescriptreact = {
-			require("formatter.defaults.prettier"),
-		},
-		yaml = {
-			require("formatter.defaults.prettier"),
-		},
-		toml = {
-			require("formatter.filetypes.toml").taplo,
-		},
-		rust = {
-			require("formatter.filetypes.rust").rustfmt,
-		},
-	},
-})
-set("", "<C-f>", ":FormatWrite<CR>", nr)
-
---comment
-
-require("Comment").setup()
-set("n", "<C-_>", ":lua require('Comment.api').toggle.linewise.current()<CR>", si)
-set("x", "<C-_>", ":lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", si)
-
 --telescope
 
 local actions = require("telescope.actions")
@@ -197,47 +147,6 @@ require("gitsigns").setup({
 	end,
 })
 
---treesitter
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-	pattern = "*.wgsl",
-	callback = function()
-		vim.bo.filetype = "wgsl"
-	end,
-})
-
-vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldlevelstart = 99
-
-require("nvim-treesitter.configs").setup({
-	ensure_installed = {
-		"c",
-		"lua",
-		"vim",
-		"vimdoc",
-		"query",
-		"rust",
-		"nu",
-		"typescript",
-		"typescript",
-		"tsx",
-	},
-	sync_install = false,
-	auto_install = true,
-	ignore_install = { "javascript" },
-	highlight = {
-		enable = true,
-	},
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			init_selection = "gnn",
-			node_incremental = "grn",
-			scope_incremental = "grc",
-			node_decremental = "grm",
-		},
-	},
-})
 
 --nvim-ufo
 vim.o.foldcolumn = "1" -- '0' is not bad

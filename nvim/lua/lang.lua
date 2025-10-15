@@ -1,16 +1,12 @@
-local set = vim.keymap.set
-local nr = { noremap = true }
-local si = { silent = true }
-local nrsi = { unpack(nr), unpack(si) }
+-- remove?
+require("mason").setup()
 
 --lsp
-
-require("mason").setup()
 local servers = { "ts_ls", "rust_analyzer", "tailwindcss", "wgsl_analyzer" }
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 vim.lsp.config("*", {
-  capabilities = capabilities,
+	capabilities = capabilities,
 })
 for _, lsp in pairs(servers) do
 	vim.lsp.config(lsp, {})
@@ -51,56 +47,45 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
---cmp
-
-require("luasnip.loaders.from_vscode").lazy_load()
-
-local cmp = require("cmp")
-
-local luasnip = require("luasnip")
-
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-b>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-e>"] = cmp.mapping.abort(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Set `select` to `false` to only confirm explicitly selected items.
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			elseif has_words_before() then
-				cmp.complete()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-	}),
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-	}, {
-		{ name = "buffer" },
-	}),
+--treesitter
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+	pattern = "*.wgsl",
+	callback = function()
+		vim.bo.filetype = "wgsl"
+	end,
 })
 
-require("cmp").config.formatting = {
-  format = require("tailwindcss-colorizer-cmp").formatter
-}
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldlevelstart = 99
+
+require("nvim-treesitter.configs").setup({
+	ensure_installed = {
+		"c",
+		"lua",
+		"vim",
+		"vimdoc",
+		"query",
+		"rust",
+		"nu",
+		"typescript",
+		"typescript",
+		"tsx",
+	},
+	sync_install = false,
+	auto_install = true,
+	ignore_install = { "javascript" },
+	highlight = {
+		enable = true,
+	},
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "gnn",
+			node_incremental = "grn",
+			scope_incremental = "grc",
+			node_decremental = "grm",
+		},
+	},
+})
+

@@ -1,4 +1,5 @@
 require("plugins")
-require("config")
+require("lang")
+require("develop")
 require("setup")
-require("lsp")
+require("config")
