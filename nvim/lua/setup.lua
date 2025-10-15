@@ -79,13 +79,6 @@ telescope.load_extension("fzy_native")
 
 --trouble
 require("trouble").setup()
-set("n", "<leader>xx", "<cmd>Trouble toggle<cr>", nrsi)
-set("n", "gr", "<cmd>Trouble lsp_references focus=true<cr>", nrsi)
-
-set("", "<Leader>ff", "<cmd>Telescope find_files<CR>", nr)
-set("", "<Leader>fg", "<cmd>Telescope live_grep<CR>", nr)
-set("", "<Leader>fb", "<cmd>Telescope buffers<CR>", nr)
-set("", "<Leader>fh", "<cmd>Telescope help_tags<CR>", nr)
 
 --git
 require("gitsigns").setup({
