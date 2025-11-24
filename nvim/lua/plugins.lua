@@ -37,19 +37,6 @@ require("lazy").setup({
 		branch = "master",
 		lazy = false,
 		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "nu" }, -- Ensure the "nu" parser is installed
-				highlight = {
-					enable = true, -- Enable syntax highlighting
-				},
-			})
-		end,
-		dependencies = {
-			-- Additional Nushell parser
-			{ "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
-		},
-		build = ":TSUpdate",
 	},
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = { "nvim-tree/nvim-web-devicons" } },
 	"neovim/nvim-lspconfig",
@@ -116,7 +103,6 @@ require("lazy").setup({
 		end,
 	},
 	{ "zbirenbaum/copilot-cmp" },
-	{ "LhKipp/nvim-nu" },
 	{ "kevinhwang91/promise-async" },
 	{ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" },
 	{

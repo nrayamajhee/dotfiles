@@ -13,10 +13,6 @@ for _, lsp in pairs(servers) do
 end
 vim.lsp.enable(servers)
 
-vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float)
-
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
