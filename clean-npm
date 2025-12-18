@@ -1,0 +1,26 @@
+#!/usr/bin/env nu
+
+def main [
+--skip-install
+] {
+  let node_modules_dirs = (
+    ls **/* |
+    where type == dir and ($it.name | path basename) == "node_modules" |
+    where not (
+      $it.name |
+      path dirname |
+      str contains "node_modules"
+    )
+  )
+  print "🗑️ Deleting the following node_modules directories:"
+  print $node_modules_dirs
+
+  $node_modules_dirs | each { |it|
+    rm -rf $it.name
+  }
+
+  if not $skip_install {
+    print "📦 Reinstalling dependencies..."
+    npm i
+  }
+}
