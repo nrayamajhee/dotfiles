@@ -1,0 +1,22 @@
+#!/usr/bin/env nu
+
+def main [] {
+    ls ...(glob **/*.{JPG,jpg})
+    | where type == file
+    | where name !~ `/\.` and name !~ `^\.`
+    | where name !~ "darktable_exported"
+    | insert focal_length { |row|
+        let exif_data = (^exiv2 -g FocalLengthIn35mmFilm $row.name | str trim)
+        let parsed = ($exif_data | parse --regex '.*\s+(?<val>[\d\.]+)\s+mm$')
+        if ($parsed | is-empty) {
+            0
+        } else {
+          $parsed | get 0.val | into float | math round
+        }
+    }
+    | group-by focal_length 
+    | transpose "focal length" "files"
+    | insert count { |row| $row.files | length }
+    | select "focal length" count
+    | sort-by "count"
+}
