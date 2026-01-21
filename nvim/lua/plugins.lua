@@ -87,22 +87,22 @@ require("lazy").setup({
 		},
 	},
 	"williamboman/mason.nvim",
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		config = function()
-			require("copilot").setup({
-				suggestion = {
-					auto_trigger = true,
-					keymap = {
-						accept = "<C-l>",
-					},
-				},
-			})
-		end,
-	},
-	{ "zbirenbaum/copilot-cmp" },
+	-- {
+	-- 	"zbirenbaum/copilot.lua",
+	-- 	cmd = "Copilot",
+	-- 	event = "InsertEnter",
+	-- 	config = function()
+	-- 		require("copilot").setup({
+	-- 			suggestion = {
+	-- 				auto_trigger = true,
+	-- 				keymap = {
+	-- 					accept = "<C-l>",
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
+	-- { "zbirenbaum/copilot-cmp" },
 	{ "kevinhwang91/promise-async" },
 	{ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" },
 	{
