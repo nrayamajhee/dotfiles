@@ -2,7 +2,7 @@
 require("mason").setup()
 
 --lsp
-local servers = { "ts_ls", "rust_analyzer", "tailwindcss", "wgsl_analyzer" }
+local servers = { "ts_ls", "rust_analyzer", "tailwindcss", "wgsl_analyzer", "pyright" }
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 vim.lsp.config("*", {
