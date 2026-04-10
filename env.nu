@@ -22,6 +22,7 @@ $env.FLYCTL_INSTALL = "/home/nishan/.fly"
 $env.PATH = (
   $env.PATH |
   append "/home/nishan/.local/bin" |
+  append "/Users/nishan/.opencode/bin" |
   append "/home/nishan/.cargo/bin" |
   append "/home/nishan/.local/share/gem/ruby/3.0.0/bin" |
   append $"($env.FLYCTL_INSTALL)/bin"

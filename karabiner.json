@@ -3,6 +3,22 @@
     "manipulators": [
         {
             "from": {
+                "key_code": "left_command",
+                "modifiers": {
+                    "mandatory": ["left_option"],
+                    "optional": ["caps_lock"]
+                }
+            },
+            "to": [
+                {
+                    "hold_down_milliseconds": 100,
+                    "key_code": "caps_lock"
+                }
+            ],
+            "type": "basic"
+        },
+        {
+            "from": {
                 "key_code": "tab",
                 "modifiers": { "mandatory": ["option"] }
             },
