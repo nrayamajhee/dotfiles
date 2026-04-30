@@ -52,36 +52,45 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 })
 
 vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldlevelstart = 99
 
-require("nvim-treesitter.configs").setup({
-	ensure_installed = {
-		"c",
-		"lua",
-		"vim",
-		"vimdoc",
-		"query",
-		"rust",
-		"nu",
-		"typescript",
-		"typescript",
-		"tsx",
-	},
-	sync_install = false,
-	auto_install = true,
-	ignore_install = { "javascript" },
-	highlight = {
-		enable = true,
-	},
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			init_selection = "gnn",
-			node_incremental = "grn",
-			scope_incremental = "grc",
-			node_decremental = "grm",
-		},
-	},
+-- nvim-treesitter `main` branch API: install parsers explicitly,
+-- then enable highlighting/folding via Neovim's built-in treesitter
+-- on FileType. There is no `configs.setup` / `ensure_installed` /
+-- `highlight.enable` anymore.
+local ts_parsers = {
+	"c",
+	"lua",
+	"vim",
+	"vimdoc",
+	"query",
+	"rust",
+	"nu",
+	"typescript",
+	"tsx",
+}
+
+require("nvim-treesitter").install(ts_parsers)
+
+-- Map filetypes to parser names where they differ
+local ft_to_parser = {
+	typescriptreact = "tsx",
+}
+
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function(args)
+		local ft = vim.bo[args.buf].filetype
+		local lang = ft_to_parser[ft] or ft
+		if not lang or lang == "" then
+			return
+		end
+		-- Only start if a parser is available; suppress errors on unsupported fts.
+		local ok = pcall(vim.treesitter.start, args.buf, lang)
+		if ok then
+			vim.wo.foldmethod = "expr"
+			vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+		end
+	end,
 })
 

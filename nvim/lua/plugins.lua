@@ -25,7 +25,7 @@ require("lazy").setup({
 	"numToStr/Comment.nvim",
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.8",
+		tag = "v0.2.2",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
@@ -34,7 +34,7 @@ require("lazy").setup({
 	"lewis6991/gitsigns.nvim",
 	{
 		"nvim-treesitter/nvim-treesitter",
-		branch = "master",
+		branch = "main",
 		lazy = false,
 		build = ":TSUpdate",
 	},

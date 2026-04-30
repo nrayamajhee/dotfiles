@@ -14,7 +14,7 @@ vim.opt.clipboard = "unnamedplus"
 
 --code-folding
 vim.opt.foldmethod = "indent"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 --line-number
 
