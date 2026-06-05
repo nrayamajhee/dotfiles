@@ -1,4 +1,4 @@
-
+#!/usr/bin/env nu
 def isLinux [] { sys  host | get long_os_version | str contains "Linux" }
 def isMac [] { sys  host | get long_os_version | str contains "MacOS" }
 
@@ -54,11 +54,11 @@ def check_pacman [] {
 }
 
 
-export def git [] {
+def "main git" [] {
   cp gitconfig ~/.gitconfig
 }
 
-export def font [] {
+def "main font" [] {
   if (isLinux) {
     create_dir_if_unavil ~/.config/fontconfig
     cp fonts.conf ~/.config/fontconfig/
@@ -67,7 +67,7 @@ export def font [] {
   }
 } 
 
-export def alacritty [] { 
+def "main alacritty" [] { 
     cp tmux.conf ~/.tmux.conf
     create_dir_if_unavil ~/.config/alacritty
     if (isLinux) {
@@ -77,33 +77,33 @@ export def alacritty [] {
     }
 }
 
-export def shell [] {
+def "main shell" [] {
     let env_file = ("./env.nu" | path expand)
     open $nu.env-path | lines | append $"source ($env_file)"  | save $nu.env-path -f
 }
 
-export def nvim [] {
+def "main nvim" [] {
   ln -s ("./nvim" | path expand) ~/.config/nvim
 }
 
 def init [] {
   check_pacman
-  if_unavail [alacritty neovim tmux starship bat ripgrep]
+  if_unavail [alacritty neovim tmux starship bat ripgrep tree-sitter-cli]
   if (isLinux) {
     if_unavail [ttf-crimson-pro ttf-inconsolata-nerd noto-fonts noto-fonts-emoji]
   }
 }
 
-export def everything [] {
+def "main everything" [] {
   init
-  git
-  font
-  alacritty
-  shell
-  nvim
+  main git
+  main font
+  main alacritty
+  main shell
+  main nvim
 }
 
-# Setup neovim
-export def main [] {
-$"setup [ git | font | alacritty | shell | nvim | everything]"
+# Setup everything
+def main [] {
+  print "Usage: ./setup [git | font | alacritty | shell | nvim | everything]"
 }
