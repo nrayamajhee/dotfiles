@@ -5,7 +5,7 @@
             "from": {
                 "key_code": "left_command",
                 "modifiers": {
-                    "mandatory": ["left_option"],
+                    "mandatory": ["right_option"],
                     "optional": ["caps_lock"]
                 }
             },
@@ -13,19 +13,6 @@
                 {
                     "hold_down_milliseconds": 100,
                     "key_code": "caps_lock"
-                }
-            ],
-            "type": "basic"
-        },
-        {
-            "from": {
-                "key_code": "tab",
-                "modifiers": { "mandatory": ["option"] }
-            },
-            "to": [
-                {
-                    "key_code": "tab",
-                    "modifiers": ["command"]
                 }
             ],
             "type": "basic"
@@ -52,19 +39,6 @@
                 {
                     "key_code": "m",
                     "modifiers": ["command", "option"]
-                }
-            ],
-            "type": "basic"
-        },
-        {
-            "from": {
-                "key_code": "h",
-                "modifiers": { "mandatory": ["command"] }
-            },
-            "to": [
-                {
-                    "key_code": "h",
-                    "modifiers": ["control", "option"]
                 }
             ],
             "type": "basic"
