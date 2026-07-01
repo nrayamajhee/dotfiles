@@ -18,8 +18,7 @@ $env.PATH = (
   $env.PATH |
   append $"($nishan_home)/.local/bin" |
   append $"($nishan_home)/.opencode/bin" |
-  append $"($nishan_home)/.cargo/bin" |
-  append $"($env.FLYCTL_INSTALL)/bin"
+  append $"($nishan_home)/.cargo/bin" 
 )
 
 alias edit = nvim
