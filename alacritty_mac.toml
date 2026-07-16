@@ -64,6 +64,8 @@ bindings = [
   { key = "Z", mods = "Alt", chars = "\u001bz" },
 
   { key = "Backslash", mods = "Alt", chars = "\u001b\\" },
+  { key = "Minus", mods = "Alt", chars = "\u001b-" },
+  { key = "Equals", mods = "Alt", chars = "\u001b=" },
 
   { key = "A", mods = "Alt | Shift", chars = "\u001bA" },
   { key = "B", mods = "Alt | Shift", chars = "\u001bB" },
