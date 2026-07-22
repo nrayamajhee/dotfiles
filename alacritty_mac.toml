@@ -32,7 +32,8 @@ columns = 80
 lines = 30
 
 [window]
-opacity = 0.98
+opacity = 0.70
+blur=true
 
 [keyboard]
 bindings = [
@@ -118,7 +119,6 @@ bindings = [
   { key = "T", mods = "Command", chars = "\u0014" },
   { key = "U", mods = "Command", chars = "\u0015" },
   { key = "V", mods = "Command", chars = "\u0016" },
-  { key = "V", mods = "Command|Shift", action = "Paste" },
   { key = "W", mods = "Command", chars = "\u0017" },
   { key = "X", mods = "Command", chars = "\u0018" },
   { key = "Y", mods = "Command", chars = "\u0019" },
@@ -126,4 +126,7 @@ bindings = [
 
   { key = "Backslash", mods = "Command", chars = "\u001c" },
   { key = "Slash", mods = "Command", chars = "\u001f" },
+
+  { key = "V", mods = "Command|Shift", action = "Paste" },
+  { key = "C", mods = "Command|Shift", action = "Copy" },
 ]
