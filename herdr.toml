@@ -1,0 +1,26 @@
+[terminal]
+default_shell = "nu"
+
+[keys]
+prefix = "ctrl+s"
+toggle_sidebar = "prefix+\\"
+next_workspace = "prefix+n"
+previous_workspace = "prefix+p"
+next_tab = "prefix+."
+previous_tab = "prefix+,"
+
+[theme]
+name = "one-dark"
+auto_switch = false
+
+[ui.toast]
+delivery = "herdr"
+
+[ui]
+show_agent_labels_on_pane_borders = true
+pane_gaps = false
+sidebar_collapsed_mode = "hidden"
+
+[experimental]
+pane_history = false
+

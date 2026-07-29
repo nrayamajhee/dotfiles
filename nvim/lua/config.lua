@@ -38,7 +38,7 @@ vim.g.transparent_enabled = true
 local set = vim.keymap.set
 local nr = { noremap = true }
 local si = { silent = true }
-local nrsi = { unpack(nr), unpack(si) }
+local nrsi = { noremap = true, silent = true }
 
 set("", "<C-o>", ":echo expand('%:p')<CR>", nrsi)
 set("", "<C-h>", ":nohlsearch<CR>", nrsi)
