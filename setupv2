@@ -1,0 +1,166 @@
+#!/usr/bin/env nu
+
+def is-mac [] { (sys host | get name) == "Darwin" }
+def is-linux [] { (sys host | get name) == "Linux" }
+
+def link-targets [] {
+  {
+    herd: {
+      src: "herdr.toml"
+      dest: ("~/.config/herdr/config.toml" | path expand --no-symlink)
+    }
+    nvim: {
+      src: "nvim"
+      dest: ("~/.config/nvim" | path expand --no-symlink)
+    }
+    nushell: {
+      src: "nu-config.nu"
+      dest: ($nu.user-autoload-dirs | first | path join "nu-config.nu")
+    }
+    alacritty: {
+      src: (if (is-mac) { "alacritty_mac.toml" } else { "alacritty.toml" })
+      dest: ("~/.config/alacritty/alacritty.toml" | path expand --no-symlink)
+    }
+    git: {
+      src: "gitconfig"
+      dest: ("~/.gitconfig" | path expand --no-symlink)
+    }
+    tmux: {
+      src: "tmux.conf"
+      dest: ("~/.tmux.conf" | path expand --no-symlink)
+    }
+  }
+}
+
+def packages [] {
+  {
+    pacman: [
+      alacritty neovim tmux nushell starship
+      bat ripgrep tree-sitter-cli git-delta trash-cli
+      ttf-crimson-pro ttf-inconsolata-nerd noto-fonts noto-fonts-emoji
+    ]
+    brew: [
+      neovim tmux nushell starship
+      bat ripgrep tree-sitter-cli git-delta trash
+    ]
+    cask: [
+      alacritty
+      font-crimson-pro font-inconsolata-nerd-font
+    ]
+  }
+}
+
+def install-brew [] {
+  if (which brew | is-empty) {
+    error make { msg: "no brew found. install it from https://brew.sh first" }
+  }
+
+  let pkgs = (packages)
+
+  let installed = (brew list --formula | lines)
+  let missing = ($pkgs.brew | where { |p| $p not-in $installed })
+  if ($missing | is-empty) {
+    print "all formulae present"
+  } else {
+    print $"installing: ($missing | str join ' ')"
+    brew install ...$missing
+  }
+
+  let installed_casks = (brew list --cask | lines)
+  let missing_casks = ($pkgs.cask | where { |p| $p not-in $installed_casks })
+  if ($missing_casks | is-empty) {
+    print "all casks present"
+  } else {
+    print $"installing casks: ($missing_casks | str join ' ')"
+    $missing_casks | each { |c|
+      try {
+        brew install --cask --adopt $c
+        null
+      } catch {
+        print $"failed to install cask ($c), skipping"
+      }
+    } | ignore
+  }
+}
+
+def install-pacman [] {
+  if (which paru | is-empty) {
+    error make { msg: "no paru found. install it from https://github.com/Morganamilo/paru first" }
+  }
+
+  let missing = (packages).pacman | where { |p|
+    (^pacman -Qq $p | complete | get exit_code) != 0
+  }
+
+  if ($missing | is-empty) {
+    print "all packages present"
+  } else {
+    print $"installing: ($missing | str join ' ')"
+    paru -S --needed --noconfirm ...$missing
+  }
+}
+
+def "main install" [] {
+  if (is-mac) {
+    install-brew
+  } else if (is-linux) {
+    install-pacman
+  } else {
+    error make { msg: $"unsupported os ((sys host | get name))" }
+  }
+}
+
+def link-one [name: string, repo: path] {
+  let targets = (link-targets)
+
+  if ($name not-in ($targets | columns)) {
+    error make { msg: $"unknown link target '($name)'. available: ($targets | columns | str join ', ')" }
+  }
+
+  let entry = ($targets | get $name)
+  let src = ($repo | path join $entry.src)
+  let dest = $entry.dest
+
+  if not ($src | path exists) {
+    error make { msg: $"missing source ($src)" }
+  }
+
+  mkdir ($dest | path dirname)
+
+  try { rm -rf $dest }
+
+  ln -s $src $dest
+  print $"linked ($name)\n($dest) -> ($src)"
+}
+
+def "main link" [
+  ...names: string # target names to link, "all", or "basic"
+] {
+  let targets = (link-targets | columns)
+
+  if ($names | is-empty) {
+    print $"Usage: ./setupv2 link [all | basic | ($targets | str join ' | ')]"
+    print "targets:"
+    $targets | each { |t| print $"  ($t)" } | ignore
+    return
+  }
+
+  let repo = ($env.CURRENT_FILE | path dirname)
+  let selected = ($names | each { |name|
+    if $name == "all" {
+      $targets
+    } else if $name == "basic" {
+      ["herd", "alacritty"]
+    } else {
+      [$name]
+    }
+  } | flatten | uniq)
+
+  $selected | each { |name| link-one $name $repo }
+  null
+}
+
+def main [] {
+  print $"Usage: ./setupv2 link [all | basic | (link-targets | columns | str join ' | ')]"
+  print "       ./setupv2 install"
+}

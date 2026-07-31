@@ -32,7 +32,7 @@ columns = 80
 lines = 30
 
 [window]
-opacity = 0.70
+opacity = 0.95
 blur=true
 
 [keyboard]

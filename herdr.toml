@@ -3,24 +3,56 @@ default_shell = "nu"
 
 [keys]
 prefix = "ctrl+s"
-toggle_sidebar = "prefix+\\"
-next_workspace = "prefix+n"
-previous_workspace = "prefix+p"
-next_tab = "prefix+."
+
+focus_pane_left  = ["prefix+h", "alt+h"]
+focus_pane_down  = ["prefix+j", "alt+j"]
+focus_pane_up    = ["prefix+k", "alt+k"]
+focus_pane_right = ["prefix+l", "alt+l"]
+
+resize_mode = "prefix+space"
+
+swap_pane_left  = "prefix+shift+h"
+swap_pane_down  = ["prefix+shift+j", "prefix+s", "alt+s"]
+swap_pane_up    = "prefix+shift+k"
+swap_pane_right = "prefix+shift+l"
+
+split_horizontal = ["prefix+minus", "alt+minus"]
+split_vertical   = ["prefix+=", "alt+="]
+close_pane       = ["prefix+x", "alt+x"]
+
+new_workspace      = ["prefix+shift+n", "alt+shift+n"]
+next_workspace     = ["prefix+n", "alt+n"]
+previous_workspace = ["prefix+p", "alt+p"]
+rename_workspace   = ["prefix+r", "alt+r"]
+workspace_picker   = ["prefix+w", "alt+w"]
+switch_workspace   = "prefix+1..9"
+
+new_tab      = "prefix+c"
+next_tab     = "prefix+."
 previous_tab = "prefix+,"
+rename_tab   = "prefix+shift+t"
+switch_tab   = "prefix+alt+1..9"
+
+toggle_sidebar = ["prefix+\\", "alt+\\", "prefix+b"]
+settings       = "prefix+shift+s"
+
+navigate_pane_left  = "h"
+navigate_pane_down  = "j"
+navigate_pane_up    = "k"
+navigate_pane_right = "l"
 
 [theme]
-name = "one-dark"
+name = "solarized"
 auto_switch = false
 
 [ui.toast]
 delivery = "herdr"
 
 [ui]
-show_agent_labels_on_pane_borders = true
+show_agent_labels_on_pane_borders = false
 pane_gaps = false
 sidebar_collapsed_mode = "hidden"
 
+agent_panel_sort = "priority"
 [experimental]
 pane_history = false
-

@@ -22,6 +22,8 @@ $env.PATH = (
 )
 
 alias edit = nvim
+alias nu-open = open
+alias open = /usr/bin/open
 alias fopen = /usr/bin/open
 alias suedit = sudo nvim
 alias pac = paru

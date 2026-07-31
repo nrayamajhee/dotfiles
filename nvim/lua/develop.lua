@@ -104,6 +104,6 @@ set("", "<C-f>", ":FormatWrite<CR>", nr)
 --comment
 
 require("Comment").setup()
-set("n", "<C-_>", ":lua require('Comment.api').toggle.linewise.current()<CR>", si)
-set("x", "<C-_>", ":lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", si)
+set("n", "<C-_>", "<Cmd>lua require('Comment.api').toggle.linewise.current()<CR>", nrsi)
+set("x", "<C-_>", "<Cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", nrsi)
 
