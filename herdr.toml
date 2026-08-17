@@ -20,26 +20,20 @@ split_horizontal = ["prefix+minus", "alt+minus"]
 split_vertical   = ["prefix+=", "alt+="]
 close_pane       = ["prefix+x", "alt+x"]
 
-new_workspace      = ["prefix+shift+n", "alt+shift+n"]
-next_workspace     = ["prefix+n", "alt+n"]
-previous_workspace = ["prefix+p", "alt+p"]
+new_workspace      = ["prefix+shift+w", "alt+shift+w"]
+next_workspace     = "prefix+."
+previous_workspace = "prefix+,"
 rename_workspace   = ["prefix+r", "alt+r"]
 workspace_picker   = ["prefix+w", "alt+w"]
 switch_workspace   = "prefix+1..9"
 
-new_tab      = "prefix+c"
-next_tab     = "prefix+."
-previous_tab = "prefix+,"
-rename_tab   = "prefix+shift+t"
+new_tab      = ["prefix+shift+n", "alt+shift+n", "prefix+c"]
+next_tab     = ["prefix+n", "alt+n"]
+previous_tab = ["prefix+p", "alt+p"]
 switch_tab   = "prefix+alt+1..9"
 
 toggle_sidebar = ["prefix+\\", "alt+\\", "prefix+b"]
 settings       = "prefix+shift+s"
-
-navigate_pane_left  = "h"
-navigate_pane_down  = "j"
-navigate_pane_up    = "k"
-navigate_pane_right = "l"
 
 [theme]
 name = "solarized"
