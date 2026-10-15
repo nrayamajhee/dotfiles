@@ -2,6 +2,7 @@
   "description": "Nishan's Custom Bindings",
   "manipulators": [
     {
+      "description": "Caps Lock toggle: Right ⌥ + Left ⌘ presses Caps Lock, since the Caps Lock key itself is ⌘ (held 100 ms so macOS takes it)",
       "from": {
         "key_code": "left_command",
         "modifiers": {
@@ -18,6 +19,25 @@
       "type": "basic"
     },
     {
+      "description": "⌘⌥ chord: Caps Lock (right ⌘) held, then Left ⌘, holds ⌘⌥, so Caps Lock + Left ⌘ + V is ⌘⌥V",
+      "from": {
+        "key_code": "left_command",
+        "modifiers": { "mandatory": ["right_command"], "optional": ["caps_lock"] }
+      },
+      "to": [{ "key_code": "left_option", "modifiers": ["right_command"] }],
+      "type": "basic"
+    },
+    {
+      "description": "⌘⌥ chord, other order: Left ⌘ held, then Caps Lock (right ⌘), holds ⌘⌥",
+      "from": {
+        "key_code": "right_command",
+        "modifiers": { "mandatory": ["left_command"], "optional": ["caps_lock"] }
+      },
+      "to": [{ "key_code": "right_option", "modifiers": ["left_command"] }],
+      "type": "basic"
+    },
+    {
+      "description": "Developer tools: ⌘⇧I sends ⌘⌥I, as Ctrl+Shift+I opens them on Linux and Windows",
       "from": {
         "key_code": "i",
         "modifiers": { "mandatory": ["command", "shift"] }
@@ -31,6 +51,7 @@
       "type": "basic"
     },
     {
+      "description": "Responsive mode: ⌘⇧M sends ⌘⌥M (Firefox's responsive design mode), as Ctrl+Shift+M on Linux and Windows",
       "from": {
         "key_code": "m",
         "modifiers": { "mandatory": ["command", "shift"] }
@@ -44,6 +65,7 @@
       "type": "basic"
     },
     {
+      "description": "Screenshot toolbar: F13 sends ⌘⇧5",
       "from": { "key_code": "f13" },
       "to": [
         {
@@ -54,6 +76,7 @@
       "type": "basic"
     },
     {
+      "description": "No hiding: ⌘H sends ⌃⌥H instead of hiding the app",
       "from": {
         "key_code": "h",
         "modifiers": { "mandatory": ["command"] }
